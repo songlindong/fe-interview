@@ -187,5 +187,9 @@ frame.contentWindow.xxx
 ## 怎样计算首屏和白屏的时间？常统计的页面性能数据指标包括？
 FP FCP
 ## 页面上有哪些领域可以做进一步的性能优化？
-
+- visibility:hidden --> display:none
+- 避免使用table
+- 避免层级过多
+- dom insert -- fragment
+- requestIdelCallback
 ## 浏览器之间的线程调度是怎么做的？
