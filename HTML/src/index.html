@@ -7,8 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="x.html" target="_blank" rel="noopenr noreferer">跳转</a>
+    <!-- <a href="x.html" target="_blank" rel="noopenr noreferer">跳转</a>
    <a href="#">标签一</a>
-   <a href="javascript:void(0)">标签二</a>
+   <a href="javascript:void(0)">标签二</a> -->
+   <script>
+    customElements.define('shadow-test', class extends HTMLElement {
+        connectedCallback(){
+            const shadow = this.attachShadow({mode: 'open'})
+            shadow.innerHTML = 'this is a shadow dow'
+        }
+    });
+   </script>
+   <shadow-test></shadow-test>
 </body>
 </html>

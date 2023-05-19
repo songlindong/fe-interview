@@ -142,25 +142,50 @@ otherWindow.opener = null
 渐进式网页应用
 核心技术：
 -app manifest
--service worker
+-service worker 客户端代理的工作
 -web push
 
 ## 什么是Shadow DOM？
+web component 做到真正的组件化
+stencil 框架
+- 原生规范，无需框架
+- 原生使用，无需编译
+- 真正意义上的 css scope
+```js
+ 
+```
 
 ## iframe有哪些应用？
+- 最常见的一种微前端手段
+- ajax 上传图片
+- 广告
+- 跨域
 
 ## 如处理iframe通信？
+- 同域下面
 
+```js
+document.domain = "baidu.com"
+frame.contentWindow.xxx
+```
+-post message
 ## 什么是web worker？为什么要使用web worker?
 
 ## ? 什么是SSO打通？怎么做前端沙盒模式？
 
 ## 浏览器的渲染和布局逻辑是什么？
+- DOM 树构建
+- CSS 树构建
+- 浏览器树构建
+- 页面布局
+- 页面绘制
 
 ## 页面的重绘回流是什么？
+1、
+2、改变盒模型、会引起回流(重排)
 
 ## 怎样计算首屏和白屏的时间？常统计的页面性能数据指标包括？
-
+FP FCP
 ## 页面上有哪些领域可以做进一步的性能优化？
 
 ## 浏览器之间的线程调度是怎么做的？
