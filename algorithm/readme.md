@@ -208,7 +208,7 @@
 
             xhr.send()
           }
-       })
+       }})
 
         return promise
     }
@@ -373,6 +373,28 @@
   // url => query => id=2 | id =2&id=3 | &enabled | 中文解码
   function parseParam(url) {
     // 1. 提取？后的东西
-    const paramsStr = /.+\?/
+    const paramsStr = /.+\?(.+)$/.exec(url)[1];
+    const paramsArr = paramsStr.split('&')
+
+    const result = {}
+    (paramsArr || []).forEach(param =>{
+        if(/=/.test(param)){
+            let [key, val] = param.split('=')
+
+            val = decodeURIComponent(val)
+            val = /^\d+$/.test(val)
+               ? parseFloat(val)
+               : val
+
+            if(result.hasOwmProperty(key)){
+                result[key] = [].conca(result[key], val)
+            } else {
+                result[key] = val
+            }
+        } else {
+            result[param] = true
+        }
+    })
+    return  result;
   }
 ```
