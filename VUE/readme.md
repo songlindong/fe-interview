@@ -94,13 +94,27 @@ b. $ref / $children | $parent - 用于指向性通信
    - 缺点
     - 难以维护，你是打破了数据的封装
 c. EventBus - 隔代、兄弟等非直接通信
-
+   - $emit, $on
+   - 优点
+    - 原理简单，多层组件的事件传播
+   - 缺点
+    - 很难模块化
+    - 多人开发，容易造成一些bug
+    - $on, $off
 d. $attrs / $listener - 隔代等监听型通信
    - 常用对一些原生组件的一些封装
 e. provide / inject - 隔代广播等
+   - 优点
+    - 解决一层层传递问题
+   - 缺点
+    - 非响应式
 f. vuex - 整体状态机
+  - 优点
+   - 多层组件的事件传播
+   - 单项数据流
+   - 统一状态管理
 
-
+平衡熵，一个系统的混乱程度
 ## 什么是函数式组件，函数式组件注意项？
 
 
@@ -108,16 +122,35 @@ f. vuex - 整体状态机
 写一段源码
 
 ## v-model的含义是什么？不同版本有何差异？
+Vue2 就是一个语法糖
 ```html
-<el-input :value="foo" @input="foo = $event" />
-<el-input :value="foo" @update:value="foo = $event" />
-```
-## vue3 和vue2 Diff对比
-最长上升子序列
+<input :value="foo" @input="foo = $event.target.value" />
 
+.sync
+<el-input :value="foo" @update:value="foo = $event.target.value" />
+```
+
+Vue3
+为了让v-model更好的针对多个属性进行双向绑定
+1. 去掉了sync，原本的功能，由v-model来代替
+2. 对自定义组件使用v-model时，value -> modelValue
+
+<input :value="modelValue" @update:modelValue="foo = $event.target.value" />
+
+## vue3 和vue2 Diff对比
+Vue3中使用了最长上升子序列
+runtime-core/src/renderer.ts 2494行
+莱文斯坦最短编辑距离
+old 和new的顺序，泛化成数字
 
 ## computed 和 watch 有何异同
-
+computed:
+ - 缓存，不支持异步，
+ - 一般一个属性，可以有其他属性计算而来，可以用
+watch：
+ - 无缓存，可异步
+ - immediate 立即
+ - deep 深度监听
 
 ## MVVM的含义以及如何实现一个迷你版MVVM框架？
 
@@ -129,8 +162,24 @@ f. vuex - 整体状态机
 - openBlock
 - monorepo
 - typescript
+```html
+  <div>
+    
+  </div>
+```
 
 ## vue-router的核心功能？$route 和 $router 有何区别
+$router 路由器，访问整个项目的路由结构
+router.beforeEach()
+router.afterEach()
+router.push()
+router.replace()
+router.go()
+router.back()
+router.forward()
 
+
+$route, 静态的信息
+fullpath, hash, meta, query, path, params
 
 ## vueX的状态管理流程？如何正确使用状态机
