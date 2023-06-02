@@ -198,13 +198,48 @@ console.log('script end.');
   }
 ```
 ### 垃圾回收是如何实现的
+引用计数，
+a -> b b -> a
+
+标记清除
+我从根节点出发，所有的能够索引到的，都不是垃圾，其他的在，就是垃圾
+GC root
+ - 全局 window / global 对象
+ - DOM 树
+ - 存在栈上的变量
+
+### 两个垃圾回收器 / 代际假说
+  - Major 主垃圾回收器 / 老生代 / 老而不死
+  - Major 副垃圾回收器 / 新生代 / 朝生而死 / Scavenge
 
 ## 内存泄露是什么，常见的内存泄露原因以及排查方法是什么
+1. 全局变量
+2. 闭包
+3. 事件监听
+
+检测方法：
+1. heapdump / npm
+2. chrome / devtoos
 
 ## websocket与常规的http有何区别
+websocket 是一个双向的通信协议，客户端可以通过upgrade 一个http, 升级websocket,和服务器保持长链接
+http 是一个在tcp协议纸上的单向协议
 
 ## 简述对于node的多进程架构的理解
+- Master -Worker 的一个模式，主从模式
+- fork 复制出一个独立的进程
+- libuv进行提供的
 
 ## 如何创建子进程，以及子进程crash后如何自动重启
 四种方式。
+spawn fork exec execfile
+- spawn
+```js
+  // 在父进程中
+  const cp = spawn
+```
+### 如何重启
+一般在生产环境中，使用pm2进行进程守护，原理是，父进程监听子进程的退出事件，然后 restart
 ## 简述 koa 的中间件原理
+```js
+```
