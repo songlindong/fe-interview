@@ -138,37 +138,49 @@ require的模块加载机制，是通过文件的读取，和script上下执行�
 ```js
 
 async function async1() {
-    console.log('async1 started');
+    console.log('async1 started'); 2
     await async2();
-    console.log('async end');  
+    console.log('async end');  8
 }
+
+// function async1() {
+//   new Promise((resolve, reject) => {
+//     console.log('async1 started'); 2
+//     console.log('async2'); 3
+//     resolve(console.log('async2')) 3
+//   }).then(res => {
+//     console.log('async end');  8
+//   })
+// }
+
+
 async function async2() {
-    console.log('async2');
+    console.log('async2'); 3
 }
-console.log('script start.');
+console.log('script start.'); 1
 setTimeout(() => {
-    console.log('setTimeout0');
+    console.log('setTimeout0'); 10
     setTimeout(() => {
-        console.log('setTimeout1');
+        console.log('setTimeout1'); 12
     }, 0);
     setImmediate(() => {
-        console.log('setImmediate');
+        console.log('setImmediate'); 11
     })
 }, 0);
 
 async1();
 process.nextTick(() => {
-    console.log('nextTick'); 
+    console.log('nextTick'); 7
 })
 
 new Promise((resolve) => {
-    console.log('promise1');
+    console.log('promise1'); 4
     resolve();
-    console.log('promise2');
+    console.log('promise2'); 5
 }).then(() => {
-    console.log('promise.then') 
+    console.log('promise.then') 9
 });
-console.log('script end.');
+console.log('script end.'); 6
 ```
 
 ## 如何描述异步I/O的流程

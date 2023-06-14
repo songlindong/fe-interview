@@ -92,6 +92,7 @@
    const o1 = {
     text: 'o1',
     fn: function() {
+       // 直接使用上下文 - 领导直接分活
         console.log('o1fn_this', this);
         return  this.text;
     }

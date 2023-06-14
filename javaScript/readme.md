@@ -217,7 +217,7 @@ isNaN包含了一个隐式转换
   内置对象
   值属性类：Infinity, NaN, undefined, null
   函数属性： eval(),parseInt()
-  对象：Object, Function,Boolean, Symbol, Error
+  对象：Object, Function, Boolean, Symbol, Error
   数字：Number, Math, Date
   字符串：String, RegExp
   集合：Map,set,weakMap
