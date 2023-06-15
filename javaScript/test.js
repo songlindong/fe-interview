@@ -36,9 +36,36 @@
 
 // fn(12242232)
 
-let a = 'abc'
+// let a = 'abc'
 
-let b = a.slice(0,1)
+// let b = a.slice(0,1)
 
-console.log(a)
-console.log(b)
+// console.log(a)
+// console.log(b)
+const o1 = {
+    text: 'o1',
+    fn: function() {
+        console.log('o1fn_this', this);
+        return  this.text;
+    }
+   }
+
+   const o2 = {
+    text: 'o2', 
+    fn: function() {
+        return o1.fn();
+    }
+   }
+
+   
+   const o3 = {
+    text: 'o3',
+    fn: function() {
+        let fn = o1.fn;
+        return fn();
+    }
+   }
+
+   // console.log('o1fn', o1.fn());
+   // console.log('o2fn', o2.fn());
+   console.log('o3fn', o3.fn());
