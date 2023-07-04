@@ -106,7 +106,7 @@ let p3 = new MyPromise((resolve, reject) => {
 })
 
 const test1 = new MyPromise((resolve, reject) => {
-    resolve('success')
+    resolve(console.log('7788'))
 })
 console.log(test1)
 const test2 = new MyPromise((resolve, reject) => {
@@ -124,4 +124,62 @@ const p3 = new Promise((resolve, reject) => {
     resolve(100)
 }).then(res => 2 * res, err => console.log(err))
   .then(res => console.log(res), err => console.log(err))
+```
+```js
+function double(value) {
+    setTimeout(() => setTimeout(console.log, 0, value * 2), 1000);
+}
+double(3);
+```
+```js
+ function double(value, success, failure) {
+    setTimeout(() => {
+        try {
+            if (typeof value !== 'number') {
+                throw 'Must provide number as first argument';
+            }
+            success(2 * value);
+        } catch (e) {
+            failure(e);
+        }
+    }, 1000);
+ }
+
+ const successCallback = (x) => console.log(`Success: ${x}`);
+ const failureCallback = (e) => console.log(`Failure: ${e}`);
+
+ double(3, successCallback, failureCallback);
+ double('b', successCallback, failureCallback);
+```
+
+```js
+ let p = new Promise((resolve, reject) => resolve());
+ setTimeout(console.log, 0, p)
+
+ new Promise(() => setTimeout(console.log, 0, 'executor'));
+ setTimeout(console.log, 0, 'promise initialized');
+
+ let p = new Promise((resolve, reject) => {
+    setTimeout(reject, 10000);
+ })
+
+ setTimeout(console.log, 0, p);
+ setTimeout(console.log, 11000, p);
+
+ setTimeout(console.log, 0, Promise.resolve(3));
+ setTimeout(console.log, 0, Promise.resolve(4, 5, 6));
+```
+
+```js
+ try {
+   throw new Error('foo')
+ } catch (e) {
+   console.log(e)
+ }
+
+ try {
+    Promise.reject(new Error('bar'));
+ } catch (e) {
+    console.log(e)
+ }
 ```
