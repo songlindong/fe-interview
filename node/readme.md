@@ -147,12 +147,11 @@ async function async1() {
 //   new Promise((resolve, reject) => {
 //     console.log('async1 started'); 2
 //     console.log('async2'); 3
-//     resolve(console.log('async2')) 3
+//     resolve(console.log('async2'))
 //   }).then(res => {
 //     console.log('async end');  8
 //   })
 // }
-
 
 async function async2() {
     console.log('async2'); 3

@@ -113,6 +113,13 @@ const test2 = new MyPromise((resolve, reject) => {
     reject('fail')
 })
 console.log(test2)
+
+const p3 = new Promise((resolve, reject) => {
+    resolve(100)
+})
+
+p3.then(res => 2 * res, err => console.log(err))
+  .then(res => console.log(res), err => console.log(err))
 ```
 1. 能够接收两个回调 resolve reject
 2. Promise 执行fulfilled -> success rejected -> fail
@@ -150,36 +157,4 @@ double(3);
 
  double(3, successCallback, failureCallback);
  double('b', successCallback, failureCallback);
-```
-
-```js
- let p = new Promise((resolve, reject) => resolve());
- setTimeout(console.log, 0, p)
-
- new Promise(() => setTimeout(console.log, 0, 'executor'));
- setTimeout(console.log, 0, 'promise initialized');
-
- let p = new Promise((resolve, reject) => {
-    setTimeout(reject, 10000);
- })
-
- setTimeout(console.log, 0, p);
- setTimeout(console.log, 11000, p);
-
- setTimeout(console.log, 0, Promise.resolve(3));
- setTimeout(console.log, 0, Promise.resolve(4, 5, 6));
-```
-
-```js
- try {
-   throw new Error('foo')
- } catch (e) {
-   console.log(e)
- }
-
- try {
-    Promise.reject(new Error('bar'));
- } catch (e) {
-    console.log(e)
- }
 ```
