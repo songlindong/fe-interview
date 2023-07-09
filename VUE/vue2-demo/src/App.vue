@@ -2,6 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div ref="text">{{ a }}, {{ b }}</div>
   </div>
 </template>
 
@@ -12,6 +13,21 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  data() {
+    return {
+      a: 1,
+      b: 2,
+    }
+  },
+  created() {
+    setTimeout(() => {
+      this.a = 3,
+      this.$nextTick(() =>{
+        console.log(this.$ref.text.innerHTML)
+      })
+      this.b = 4
+    }, 1000)
   }
 }
 </script>
