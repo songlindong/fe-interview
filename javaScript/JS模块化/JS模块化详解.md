@@ -51,6 +51,25 @@ commonjs的加载机制
 
 browserify commonjs -> TTFE
 
+### AMD async module definition (异步加载)
+
+```js
+define(function() {
+    return moduleXXX
+})
+
+define(['module1', 'module2'], function(m1, m2) {
+    return XXXX
+})
+
+require(['module1', 'module2'], function(m1, m2) {
+
+})
+
+require.js
+```
+
+
 
 
 
