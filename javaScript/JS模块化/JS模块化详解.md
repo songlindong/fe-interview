@@ -69,6 +69,69 @@ require(['module1', 'module2'], function(m1, m2) {
 require.js
 ```
 
+### CMD common module definition
+
+commonjs + amd = cmd
+
+sea.js
+
+```js
+define(function(require, exports, module) {
+    var module1 = require('./module1') // 同步的写法
+    require('./module2', function(m2) {
+        // XXXXX
+    }) // 异步的写法
+    
+    exports.XXX = value;
+    module.exports = value;
+})
+```
+
+```js
+ // CMD 
+ define(function (require, exports, module) {
+    // 依赖就近书写
+    var module1 = require('Module1');
+
+    var result1 = module1.exec();
+
+    module.exports = {
+        result1: result1,
+    }
+ })
+
+ // AMD 
+ define(['Module1'], function(module1) {
+    var result1 = module.exec();
+    return {
+        result1: result1,
+    }
+ });
+```
+### ES module esm
+
+import export 
+
+export default
+
+```js
+// lib.js
+export let counter =3;
+export function incCounter() {
+    counter++;
+}
+// main.js
+import { counter, incCounter} from './lib';
+console.log(counter); // 3
+incCounter();
+console.log(counter);// 4
+```
+
+babel-preset-2015
+
+### UMD universal module definition(通用模块)
+
+umd = commonjs + amd + cmd
 
 
 
