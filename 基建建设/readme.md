@@ -1,0 +1,13 @@
+1. 基建建设
+- 前端基础规范标准化
+ - eslint tsconfig prettier husky commitlint lint 提供脚手架维度的接入方式
+ - scan代码，找到问题 commit设置卡点
+ - 一键修复
+- 前端稳定性划分
+ - 各种异常率 JS、接口、资源
+ - 监控 onError errorHandler uv pv
+- 前端业务属性库搭建
+ - hooks dumi
+- 前端组件库搭建
+- 前端的性能体验优化
+ - 秒开率 bundler 构建工具进行分析

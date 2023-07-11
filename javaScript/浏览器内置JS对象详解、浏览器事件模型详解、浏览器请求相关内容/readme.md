@@ -173,7 +173,40 @@ $list.addEventListener('click', (e) => {
     }
  }
 ```
+### 事件委托
 
 ```js
+<ul id="myLinks">
+   <li id="goSomowhere">Go somewhere</li>
+   <li id="doSomething">Do something</li>
+   <li id="sayHI">Say hi</li>
+</ul>
+
+const item1 = document.getElementById('goSomowhere')
+const item2 = document.getElementById('doSomething')
+const item3 = document.getElementById('sayHI')
+
+EventUtils.addHandler(item1, 'click', function(e) {
+    location.href = 'xianzao.com'
+})
+EventUtils.addHandler(item2, 'click', function(e) {
+    console.lo(123)
+})
+EventUtils.addHandler(item3, 'click', function(e) {
+    alert('hello')
+})
+
+
+const list = document.getElementById('myLinks');
+
+EventUtils.addHandler(list, 'click', function(e) {
+   const event = EventUtils.getEvent('event')
+   const target = EventUtils.getTarget('event')
+})
+  
+  switch(target.id) {
+    case 'goSomeWhere':
+  }
 ```
+
 
