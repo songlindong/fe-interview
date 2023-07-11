@@ -146,6 +146,30 @@ $list.addEventListener('click', (e) => {
         } else {
             element[`on${type}`] = null;
         }
+    },
+    // 获取事件event的对象
+    getEvent: function(event) {
+        return event ?? window.event;
+    },
+    // 获取目标元素
+    getTarget: function(event) {
+        return event.target ?? event.srcElement;
+    },
+    // 阻止默认事件行为
+    preventDefault: function(event) {
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    },
+    // 停止事件传播
+    stopPropagation: function(event) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        } else {
+            event.cancelBubble = true;
+        }
     }
  }
 ```
