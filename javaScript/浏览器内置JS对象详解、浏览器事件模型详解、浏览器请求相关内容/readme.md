@@ -209,4 +209,47 @@ EventUtils.addHandler(list, 'click', function(e) {
   }
 ```
 
+- ajax
+- fetch
+- axios
 
+## ajax
+async js and xml
+
+XMLHttpRequest
+
+onreadyStatechange readyState -> onreadyStatechange
+
+readyState 状态码
+
+0：未初始化
+1：请求建立连接
+2：连接header
+3: response
+4: OK
+
+status 200~300
+
+responseText
+
+xmlHttp.open('GET/POST', url + Math.random() / new Date().getTime())
+
+```js
+let xmlHttp;
+
+if (window.XMLHttpRequest) {
+  xmlHttp = window.XMLHttpRequest
+}
+```
+
+### fetch
+
+代替XMLHttpRequest -> Promise实现
+
+```js
+ fetch(url).then(res => {
+
+ }).catch(e => {})
+```
+
+### axios
