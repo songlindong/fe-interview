@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>test</title>
+  </head>
+
+  <body>
+    <button id="click">click</button>
+    <h1 id="content"></h1>
+
+    <script>
+      let click = document.querySelector('#click');
+      let content = document.querySelector('#content');
+      let arr = [];
+
+      function closures() {
+        let test = new Array(10000).fill('xianzao');
+
+        return function () {
+          return test;
+        };
+      }
+
+      click.addEventListener('click', function () {
+        arr.push(closures());
+        arr.push(closures());
+        arr.push(closures());
+        arr.push(closures());
+        arr.push(closures());
+        arr.push(closures());
+        arr.push(closures());
+        arr.push(closures());
+        arr.push(closures());
+        arr.push(closures());
+
+        content.innerHTML = arr.length;
+      });
+    </script>
+  </body>
+</html>

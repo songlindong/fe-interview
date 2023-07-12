@@ -6,35 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<style>
- .class1 {
-    background-color: aqua;
-    overflow: hidden;
- }
-  .item_box1 {
-    background-color: bisque;
-    width: 200px;
-    height: 200px;
-  }
-  .item_box2 {
-    background-color: bisque;
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-  }
-  .item_box3 {
-    background-color: bisque;
-    width: 200px;
-    height: 200px;
-    float: right;
-  }
-</style>
 <body>
-    <div class="class1">
-       <div class="item_box1"></div>
-       <div class="item_box2"></div>
-       <div class="item_box3"></div>
-    </div>
+  <div id="root">
+    <ul id="ul">
+       <li></li>
+       <li></li>
+       <li id="li3"></li>
+       <li></li>
+    </ul>
+ </div>
+ <script>
+   let root = document.querySelector('#root')
+   let ul = document.querySelector('#ul')
+   let li3 = document.querySelector('#li3')
+   
+   console.log(root);
+   console.log('3434')
+   console.log(ul)
+   console.log(li3)
+   
+   // 由于ul变量存在，整个ul及其子元素都不能GC
+   root.removeChild(ul);
 
+   // 虽置空了ul变量，但由于li3变量引用ul的子节点
+   ul = null;
+
+   // 已无变量引用, 此时可以GC
+   li3 = null;
+
+ </script>
 </body>
 </html>
