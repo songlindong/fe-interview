@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 
 Vue.directive('demo', {
   // 只调用一次，指令第一次绑定元素时调用，主要进行初始化
-  bind(el){},
+  bind(){},
   // 被绑定元素插入父节点的时候调用
   inserted(){},
   // 所在组件的Vnode 更新时调用
