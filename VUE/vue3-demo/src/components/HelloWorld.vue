@@ -129,6 +129,31 @@ watch(
     state.number2++
   }
 )
+// data() {
+//    return {
+//     msg: 'Welcome to Your Vue.js App 多喝热水',
+//     number: 100,
+//     number2: 0
+//    }
+// },
+// computed: {
+//   addMsg() {
+//     return this.msg + this.number
+//   }
+// },
+// watch: {
+//   addMsg() {
+//     this.number2++,
+//   }
+// },
+// methods: {
+//   handleClickHeader() {
+//     this.msg += '!';
+//   },
+//   calcNumber(number) {
+//     return number + 2;
+//   }
+// }
 
 </script>
 
