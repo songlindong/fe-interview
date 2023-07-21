@@ -111,6 +111,10 @@
 
 <script setup>
 import { reactive, computed, watch } from 'vue'
+import addon from './addon'
+
+const { msg: msg1, obj: obj1,} = addon()
+
 
 // const number = ref(100);
 let msg = 'Welcome to Your Vue.js App';

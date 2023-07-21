@@ -27,3 +27,21 @@ Vue.directive('demo', {
 new Vue({
   render: h => h(App),
 }).$mount('#app')
+
+// 构造一个拓展器
+
+let _baseOptions = {
+  data: function() {
+    course: 'ceshi'
+  },
+  created() {
+    console.log('extend base')
+  }
+}
+
+const BaseComponent = Vue.extend(_baseOptions);
+new BaseComponent({
+  created() {
+    console.log('extend created')
+  }
+})

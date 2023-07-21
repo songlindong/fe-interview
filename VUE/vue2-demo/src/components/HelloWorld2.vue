@@ -41,11 +41,15 @@
 </template>
 
 <script>
+import demoMixin from './fragments/demoMixin'
+import demoExtends from './fragments/demoExtends'
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
-  },
+  mixins: [demoMixin],
+  extends: demoExtends,
+  // props: {
+  //   msg: String
+  // },
   directives:{
     xxx: {
       bind(){}
@@ -54,8 +58,12 @@ export default {
   data () {
     return {
       slotProps: '测试作用域插槽',
-      money: 100
+      money: 100,
+      msg: 'i am helloworld2'
     }
+  },
+  created() {
+    console.log('i am helloworld')
   },
   filters: {
     moneyFilter(money) {
