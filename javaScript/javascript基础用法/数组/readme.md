@@ -126,3 +126,272 @@ arr.slice(begin, end)
 - 注意：复制的数组包含start下标元素，不包含end下标元素
 - @params: 起始下标start与结束下标end，起始start必传，end不传默认复制到数组结束位置，可使用负值从数组的尾部选取元素
 - @return: 返回复制的子数组
+- 是否改变原数组：不改变
+
+```js
+ var arr = [1,2,3,6,7,8];
+ var res = arr.slice(1, 4);
+
+ console.log(res); // [2,3,6]
+ console.log(arr); // [1,2,3,6,7,8]
+
+ let arr1 = [
+    {
+        name: 'Chen'
+    },
+    'see a film',
+    'write the code',
+    'play basketball',
+    'tourism'
+ ];
+ let arr2 = arr1.slice();
+ arr2[0].name = 'Forever';
+ arr2[1] = 'play games';
+
+ console.log(arr1)
+ console.log(arr2)
+```
+
+### concat
+- concat() 方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组
+- var new_array = old_array.concat(value1[, value2[[]]])
+- @params: 多个任意项，可以是数组，可以是单个项
+- params: 多个任一项，可以是数组，可以是单个项
+- @return: 返回合并后的新数组
+- 是否改变原数组：不改变
+
+```js
+var arr = [1,2,3];
+var res = arr.concat(1, [0,0]);
+
+console.log(res); // [1,2,3,1,0,0]
+console.log(arr); // [1,2,3]
+```
+
+## 查找判断
+ ### includes
+ - includes() 方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回true, 否则返回false
+arr.includes(valueToFind[, fromIndex])
+
+- @params：参数一必传，表示要查询的元素，参数二可选，表示从指定位置查起(若为负数，从后查起，负数超过数组长度，则置为0)
+- @return：返回布尔值
+- 是否改变原数组：不改变
+
+```js
+ var arr = [1,2,3]
+ var res = arr.includes(2)
+
+ console.log(res); // true
+ console.log(arr); // [1,2,3]
+```
+
+### find
+- find() 方法返回数组中满足提供的测试函数的第一个元素的值，否则返回undefined, arr.find(function(item, index, array){}, thisArg)
+
+- @params: 函数，thisAr表示执行回调时this指向的对象
+- @return：第一个满足条件的元素或undefined
+- 是否改变原数组：不改变
+
+```js
+const array = [5, 12, 8, 130, 44];
+const found = array.find(element => element > 10);
+
+console.log(found); // 12
+console.log(array); // [5, 12, 8, 130, 44]
+```
+
+### findIndex
+
+- findIndex() 方法返回数组中满足提供的测试函数的第一个元素的索引，若没有找到对应元素则返回-1
+
+- arr.findIndex(callback[, thisArg])
+
+- @params: 函数，thisArg表示执行回调时this指向的对象
+- @return: 第一个满足条件的索引或-1
+- 是否改变原数组：不改变
+
+```js
+ const array = [5,12,8,130,44];
+ const found = array.findIndex(element => element > 10);
+ 
+ console.log(found); // 1
+ console.log(array); // [5,12,8,130,44]
+```
+
+### indexOf
+
+- indexOf() 方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1
+arr.indexOf(searchElement[, fromIndex])
+
+- @params: 参数一必传，表述要查询的元素，参数二可选，表示从指定位置查起
+- @return：如若检索项存在，返回期下标，没有就返回-1；
+- 是否改变原数组：不改变
+
+```js
+var arr = [1, 2, 3];
+
+console.log(arr.indexOf(2)); // 1
+console.log(arr.indexOf(8)); // -1
+```
+
+### lastIndexOf
+- lastIndexOf() 方法返回指定元素(也即有效的JavaScript值或变量)在数组中的最后一个的索引，如果不存在则返回-1。从数组的后面向前查找，从fromIndex处开始。
+- arr.lastIndexOf(searchElement[, fromIndex])
+
+- @params: 参数一必传，表示要查询的元素，参数二可选，表示从指定位置查起
+- @return: 如若检索项存在，返回其下标，没有就返回-1
+- 是否改变原数组：不改变
+
+```js
+var arr = [1,2,3,2,2,3,4];
+
+console.log(arr.lastIndexOf(3)); // 5
+```
+
+## 数组排序
+
+### sort
+- sort() 方法用原地算法对数组的元素进行排序，并返回数组。排序不一定是稳定的。默认排序顺序是根据字符串Unicode码点
+
+arr.sort([compareFunction])
+
+- @params: 函数
+- @return: 排序后的数组
+- 是否改变原数组：改变
+
+```js
+var arr = [1,3,9,2,5,3,7,4,5];
+
+var res1 = arr.sort((a, b) => a - b);
+console.log(res1); // [1, 2, 3, 3, 4, 5, 5, 7, 9]
+
+var res2 = arr.sort((a, b) => b - a);
+console.log(res2);
+
+console.log(arr);  // [9, 7, 5, 5, 4, 3, 3, 2, 1]
+```
+
+### reverse
+reverse() 方法将数组中的元素的位置颠倒，并返回该数组。数组的第一个元素会变成最后一个，数组的最后一个元素变成第一个。该方法会改变原数组
+ arr.reverse()
+
+- @params: 无
+- @return: 倒转排序后的数组
+- 是否改变原数组：改变
+
+```js
+var arr = [1, 2, 3, 3, 4, 5, 5, 7, 9];
+console.log(arr.reverse()) // [9, 7, 5, 5, 4, 3, 3, 2, 1]
+
+console.log(arr) // [9, 7, 5, 5, 4, 3, 3, 2, 1]
+```
+
+## 转字符串
+
+### join
+
+- join() 方法将一个数组（或一个类数组对象）的所有元素连接成一个字符串并返回这个字符串。如果数组只有一个项目，那么将返回该项目而不使用分隔符。
+
+arr.join([separator])
+
+- @params: 指定的分割符
+- @return：转换后的字符串
+- 是否改变原数组：不改变
+
+```js
+ var arr = [1,2,3,3,4,5,5,7,9];
+console.log(arr.join('-')); // "1-2-3-3-4-5-5-7-9"
+console.log(arr); // [1,2,3,3,4,5,5,7,9]
+```
+
+### toString
+
+- toString() 返回一个字符串，表示指定的数组及其元素
+arr.toString()
+
+- @params: 无
+- @return: 转换后的字符串
+- 是否改变原数组：不改变
+
+```js
+ var arr = [1, 2, 3, 3, 4, 5, 5, 7, 9];
+ console.log(arr.toString()); // '1,2,3,3,4,5,5,7,9'
+console.log(arr) // [1, 2, 3, 3, 4, 5, 5, 7, 9]
+```
+
+## 遍历映射
+
+### for
+- for循环性能最佳，内部可以阻塞
+
+```js
+ // 长度一般尽量先用赋值于变量，提升性能
+  for (let i =0; i < len; i++) {
+    continue; // 打断档次循环，进入下次循环
+    break; // 直接打断循环，跳出循环
+  }
+```
+
+### forEach
+
+- forEach() 方法对数组的每个元素执行一次给定的函数。arr.forEach(callback(currentValue[, index[, array]]))[, thisArg]
+
+- @params: 函数
+- @return: 无/undefined
+- 是否改变原数组：改变
+- 注意：除了抛出异常以外，没有办法中止或跳出forEach()循环，即break、continue、async/await都无效
+
+```js
+ const array1 = ['a','b','c'];
+ array1.forEach(element => console.log(element));
+```
+
+### map
+- map() 方法创建一个新数组，其结果是该数组中的每个元素是调用一次提供的函数后的返回值
+var newArray arr.map(callback(element[, index[, array]]))[, thisArg]
+
+- @params: 函数
+- @return: 新的数组
+- 是否改变原数组：不改变
+```js
+const array1 = [1,4,9,16];
+const map1 = array1.map(x => x * 2);
+
+console.log(map1); // [2,8,18,32]
+```
+
+### filter
+- filter() 方法创建一个新数组，其包含通过所提供函数实现的测试的所有的元素。
+var newArray = arr.filter(callback(currentValue[, index[, array]]))[, thisArg]
+
+- @params: 函数
+- @return: 满足条件的元素组成的新数组
+```js
+let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let res = nums.filter(num => num > 5);
+console.log(res); // [6,7,8,9,10];
+```
+
+### every
+- every()方法测试一个数组内的所有元素是否都能通过某个指定函数的测试。它返回一个布尔值
+arr.every(callback(currentValue[, index[, array]]))[, thisArg]
+
+```js
+ let arr = [1,2,3,4,5];
+ console.log(arr.every((item, index, array) => item > 3)) // false
+```
+
+### some
+- some() 测试一个数组内的是不是至少有一个元素是否都能通过某个指定函数的测试。它返回一个布尔值
+arr.some(callback(currentValue[, index[, array]]))[, thisArg]
+- @params: 函数
+- @return: Boolean
+- 是否改变原数组：不改变
+
+```js
+let arr = [1,2,3,4,5]
+console.log(arr.some((item, index, array) => item > 3)) // true
+```
+
+### reduce
+- reduce() 方法对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回值
