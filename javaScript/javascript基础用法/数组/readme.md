@@ -395,3 +395,168 @@ console.log(arr.some((item, index, array) => item > 3)) // true
 
 ### reduce
 - reduce() 方法对数组中的每个元素执行一个由您提供的reducer函数(升序执行)，将其结果汇总为单个返回值
+arr.reduce(callback(accumulator, currentValue[, index[, array]])[, initiaValue])
+
+- @params: 函数
+- @return: 函数累计处理的结果
+- 是否改变原数组：不改变
+
+```js
+ // 1. 数组求和
+ 
+ let sum = [0,1,2,3].reduce((accumulator, currentValue) => {
+  return accumulator + currentValue;
+ }, 0);
+
+ console.log(sum);
+
+ // 2. 数组去重
+ let arr = ['a', 'b', 'a', 'b', 'c', 'e', 'e', 'c', 'd', 'd'];
+ let newArr = arr.reduce((acc, current) => {
+  if (acc.indexOf(current) === -1) {
+    acc.push(current);
+  }
+  return acc;
+ }, [])
+ 
+ console.log(newArr); // ["a", "b", "c", "e", "d"]
+
+ // 3.数组扁平化
+ let flat = [[1, 2, 3], [4, 5, 6], [7, 8, 9]].reduce((prev, cur) => {
+  return [...prev, ...cur];
+ })
+
+ console.log(flat); // [1, 2, 3, 4, 5, 6, 7, 8]
+```
+
+### reduceRight
+
+- reduceRight() 方法接受一个函数作为累加器(accumulator)和数组的每个值(从右到左)将其减少为单个值
+
+- arr.reduceRight(callback(accumulator, currentValue[, index[, array]])[, initialValue])
+- @params: 函数
+- @return: 函数累计处理的结果
+- 是否改变原数组：不改变
+
+```js
+ const array1 = [[0,1], [2,3], [4,5]].reduceRight((acc, cur) => acc.concat(currentValue));
+
+ console.log(array1); // [4,5,2,3,0,1]
+```
+
+## 获取键值
+
+### entries
+- entries() 方法返回一个新的Array Interator对象，该对象包含数组中每个索引的键/值对
+arr.entries()
+
+```js
+const array = ['a','b','c'];
+const iterator = array.entries(); // 返回一个迭代器对象
+console.log(iterator.next().value); // [0, 'a']
+console.log(iterator.next().value); // [1, 'b']
+console.log(iterator.next().value); // [2, 'c']
+```
+
+### keys
+- keys() 方法返回一个包含数组中的每个索引键饿Array Iterator 对象
+arr.keys()
+```js
+const array1 = ['a','b','c'];
+const iterator = array1.keys(); // 返回一个迭代器对象
+
+for (const key of iterator) {
+  console.log(key); // 0, 1, 2
+}
+```
+
+### values
+- values() 方法返回一个新的Array Iterator 对象，该对象包含数组每个索引的值
+ arr.values()
+
+```js
+const array1 = ['a', 'b', 'c'];
+const iterator = array1.values(); // 返回一个迭代器对象
+for (const value of iterator) {
+  console.log(value); // 'a', 'b', 'c'
+}
+```
+
+## 其他方法
+
+## fill
+- fill() 方法用一个固定值填充一个数组中从起始索引到终止索引内的全部元素。不包括终止索引。
+arr.fill(value[, start[, end]])
+
+- @params: 固定值，起始索引，终止索引
+- @return: 指定位置被填充为固定值的原数组
+- 是否改变原数组：改变
+
+```js
+let arr = [1,2,3,4]
+arr.fill(0) // [0,0,0,0]
+
+// 多用于创建指定长度的空数组填充
+let arr1 = new Array(3)
+arr1.fill(1) // [1,1,1]
+```
+- 注意：若固定值为引用类型，则被填充的元素都会指向同个指针地址
+
+## flat
+- flat() 方法会按照一个可指定的深度递归遍历数组，并将所有元素与遍历到的子数组中的元素合并为一个新数组返回。不改变原数组。
+var newArray = arr.flat([depth])
+
+```js
+ // 扁平化数组
+ let arr1 = [1, 2, [3,4]];
+ newArr1 = arr1.flat();
+ console.log(arr1, newArr1); // [1, 2, Array(2)] [1, 2, 3, 4]
+
+ let arr2 = [1, 2, [3, 4, [5, 6]]];
+ newArr2 = arr2.flat(2);
+ console.log(newArr2); // [1, 2, 3, 4, 5, 6]
+
+ // 使用Infinity, 可展开任意深度的嵌套数组
+ let arr3  = [1, 2, [3, 4, [5, 6, [7, 8, [9, 10]]]]];
+ newArr3 = arr3.flat(Infinity);
+ console.log(newArr3); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+ // 去除空项
+ let arr4 = [1, 2, , 4, 5];
+ newArr4 = arr4.flat();
+ console.log(newArr4); // [1, 2, 4, 5]
+```
+
+### flatMap
+- flatMap() 方法首先使用映射函数映射每个元素，然后将结果压缩成一个新数组。它与map连着深度值为1的flat几乎相同，但flatMap通常在合并成一种方法的效率稍微高一些。不改变原数组。
+
+var new_array = arr.flatMap(function callback(currentValue[, index[, array]]) {
+  // return element for new_array
+}[. thisArg]
+
+- @params: 函数，函数运行时this指向的对象
+- @return: 一个新的数组，其中每个元素都是回调函数的结果，并且结构深度depth值为1
+- 是否改变原数组：不改变
+
+```js
+let arr = ["it's Sunny in", "", "California"];
+console.log(arr.map(x => x.split(" "))); // [["it's","Sunny","in"],[""],["California"]]
+console.log(arr.flatMap(x => x.split(" "))); // ["it's","Sunny","in", "", "California"]
+console.log(arr); // ["it's Sunny in", "", "California"]
+```
+
+### copyWithin
+
+- copyWithin() 方法浅复制数组的一部分到同一数组中的另一个位置，并返回它，不会改变原数组的长度
+
+arr.copyWithin(target[, start[, end]])
+- @params: target, 为基底的索引，复制序列到该位置， start复制的起始索引，end复制的末尾索引(不包含)， start默认0，end默认到最后一个
+- @return: 改变后的数组，长度不变
+- 是否改变原数组：改变
+
+```js
+ const array = ['a', 'b', 'c', 'd', 'e'];
+ console.log(array.copyWithin(0, 3, 4));  // ["d", "b", "c", "d", "e"]
+console.log(array.copyWithin(1, 3));  // ["d", "d", "e", "d", "e"]
+console.log(array) // ["d", "d", "e", "d", "e"]
+```
