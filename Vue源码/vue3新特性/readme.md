@@ -174,3 +174,71 @@ proxy.value3
 ```
 
 ## Vue3的新特性
+```bach
+yarn create vite-app <project-name>
+cd project-name
+yarn
+yarn dev
+```
+
+### 3.1 composition api
+
+1. setup
+
+vue3中组件的新的特性，作为组件统一的入口支持，
+
+```js
+setup(props, context) {
+    context.attrs -> this.$attrs
+    context.slots -> $slot
+    context.emit -> $emit
+
+    context.expose
+}
+```
+
+setup 是在beforeCreate、created之前去执行
+
+```js
+
+```
+
+## reactive() shallowReactive()
+
+- reactive: 等同于vue2 Vue.observable(), 响应式是深层，会影响所有的嵌套
+
+```js
+setup() {
+    const person = {
+        name: 'ceshi',
+        age: 1,
+        contacts: {
+            phone: 123456
+        }
+    };
+
+    const personReactive = reactive(person)
+    console.log('reactive', personReactive);
+
+    const contacts = personReactive.contacts;
+
+    console.log('contacts属性'， contacts);
+
+}
+```
+
+shallowReactive
+不会递归的去查看响应式的shallowReactive 包裹的元素
+
+## ref() isRef() toRefs()
+ref()
+
+isRef(): 判断是不是ref() 创建出来的
+toRefs(): 将reactive的结果转换为普通对象
+
+## readOnly, isReadOnly, shallowReadOnly
+
+
+- Q 为什么data不能直接返回对象，而是返回一个return的新的对象，会alloc新的内存
+
+## 生命周期
