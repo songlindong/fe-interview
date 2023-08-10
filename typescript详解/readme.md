@@ -260,7 +260,176 @@ const c3 = { name: 'TS', level:1 }
  interface D { d: boolean;}
  interface E { e: string;}
  interface D { f: number;}
+
+ type ABC = A & B & C;
+
+ let abc: ABC = {
+  x: {
+    d: false,
+    e: "class",
+    f: 5
+  }
+ }
+
+ // 面试点：合并冲突
+ interface A {
+    c: string;
+    d: string;
+ }
+ interface B {
+    c: number;
+    e: string;
+ }
+ 
+ type AB = A & B;
+
+ let ab: AB = {
+    d: 'class',
+    e: false
+ }
+ // 合并操作的关系是 且 => never
 ```
 
+#### 四、断言 - 类型声明、转换（和编译器的告知交流）
 
+* 编译时作用
 
+```ts
+  // 尖括号的形式声明 - 阶段性声明
+  let anyValue: any = 'ceshi';
+  let anyLength: number = (<string>anyValue).length;
+
+  // as声明
+  let anyValue: any = 'ceshi';
+  let anyLength: number = (anyValue as string).length;
+
+  // 非空的判断 - 只确定不是空
+  type ClassTime = () => number;
+
+  const start = (classTime: ClassTime | undefined) => {
+    let num: any = classTime(); // 1. 非空保证 2. 具体类型待定
+  }
+```
+
+### 五、类型守卫 - 保障在语法规定范围内，额外的类型确认 / 细分逻辑
+
+* 多态 - 多种状态（多种类型）
+
+```ts
+  interface Teacher {
+    name: string;
+    courses: string[];
+    score: number;
+  }
+
+  interface Student {
+    name: string;
+    startTime: Date;
+    score: string;
+  }
+
+  type Class = Teacher | Student;
+
+  function startCourse(cls: Class) {
+    if('courses' in cls) {
+      // Teacher
+    }
+    if('startTime' in cls) {
+      // Student
+    }
+    if(typeof score === 'number') {
+      // Teacher
+    }
+    if(typeof score === 'string') {
+      // Student
+    }
+
+    if(cls instanceof Teacher) {}
+    if(cls instanceof Student) {}
+  }
+
+  // 自定义类型
+  const isTeacher = function(cls: Teacher | Student): cls is Teacher {
+    return 'Teacher';
+  }
+
+  const getName = (cls: Teacher | Student) => {
+    if(isTeacher(cls)) {
+      return cls.courses;
+    }
+  }
+```
+
+### 六、TS进阶
+#### 1. 函数重载
+
+```ts
+ class Class {
+  start(name: number, score: number): number;
+  start(name: string, score: string): string;
+  start(name: string, score: number): string;
+  start(name: number, score: string): string;
+  start(name: Combinable, score: Combinable) {
+    if (typeof name === 'string' || score === 'string') {
+      return 'student';
+    }
+
+     return 'teacher';
+  };
+ }
+```
+
+#### 2. 泛型 - 重用
+
+* 让模块支持多种类型的数据 - 让类型和值一样，可以被赋值、变量、传递
+
+```ts
+ //
+ function startClass<T, U>(name: T, score: U): T {
+  return name + score;
+ }
+
+ // 1. 传参类型多态
+ function startClass<T, U>(name: T, score: U): String {
+  return `${name} + ${score}`;
+ }
+
+ // 2. 传参类型多态 + 过程中断言
+ function startClass<T, U>(name: T, score: U): T {
+  return (name + String(score)) as any as T;
+ }
+
+ startClass<number, string>('teacher', t);
+```
+
+#### 3. 装饰器 - decorator
+
+```ts
+  {
+    "experimentalDecorator": true;
+  }
+
+  // 类装饰器
+  function Zhaowa(target: Function): void {
+    target.prototype.startClass = function(): void {}
+  }
+
+  @Zhaowa
+  class Class {
+    constructor() {}
+  }
+
+  function nameWrapper(target: any, key: string) {
+    Object.defineProperty(target, key, {
+      // 拦截
+    })
+  }
+
+  // 属性装饰器
+  class Class {
+    constructor() {}
+
+    @nameWrapper
+    public name: string;
+  }
+```
