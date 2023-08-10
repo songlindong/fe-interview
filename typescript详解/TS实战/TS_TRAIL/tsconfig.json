@@ -1,0 +1,45 @@
+{
+  "include": [
+    "src/*",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compilerOptions": {
+    "strictPropertyInitialization": false,
+    // types option has been previously configured
+    "types": [
+      // add node as an option
+      "node"
+    ],
+    // typeRoots option has been previously configured
+    "typeRoots": [
+      // add path to @types
+      "node_modules/@types",
+    ],
+    "strict": true,
+    // 支持jsx语法，tsx
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    // 允许没有默认export的模块中，默认import
+    "allowSyntheticDefaultImports": true,
+    // 启用装饰器
+    "experimentalDecorators": true,
+    "strictFunctionTypes": false,
+    "allowJs": true,
+    "module": "esnext",
+    "target": "es5",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "lib": [
+      "dom",
+      "es5",
+      "es6",
+      "es7",
+      "es2015.promise"
+    ],
+    "sourceMap": true,
+    "pretty": true
+  }
+}
