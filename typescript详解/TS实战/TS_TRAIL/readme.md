@@ -38,7 +38,7 @@ tsconfig.json
   import Component from 'vue-class-component'
   
   // @Component 本质 - 类装饰器 => 利用装饰器，统一类描述vue模板等
-  @Compoent({
+  @Component({
     template: '<vueComponent></vueComponent>'
   })
   export default class myComponent extends Vue {
