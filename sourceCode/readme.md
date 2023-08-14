@@ -351,7 +351,7 @@
         return []
      }
 
-     let _map = {}
+     let map = {}
      arr.forEach(item => {
         map[item.id] = item
      })
@@ -362,7 +362,7 @@
        if(_parent){
         (_parent.children || (_parent.children = [])).push(item)
        } else {
-         resulty.push(item)
+         result.push(item)
        }
      })
      return result
