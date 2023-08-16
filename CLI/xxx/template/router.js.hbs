@@ -1,0 +1,25 @@
+import { createRouter, createWebHashHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
+  },
+  {{#each list}}
+    {
+      path: '/{{name}}',
+      name: '{{name}}',
+      component: () => import('../views/{{file}}')
+    },
+  {{/each}}
+]
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes
+})
+
+export default router
+
