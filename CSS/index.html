@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello world</h1>
+    <h2>hello students</h1>
+    <div style="background-color: #f66; height: 200px">
+        <div style="background-color: #ff6; height: 100px; width: 50%">
+            <span>盒模型</span>
+        </div>
+    </div>
+    
+    <hr />
+    <h2>BFC 例题</h2>
+    <h3>BFC 例1：</h3>
+
+    <div class="left1"></div>
+    <div class="right1"></div>
+
+    <h3>BFC 例2：</h3>
+    <div class="root">
+        <div class="child child1"></div>
+        <div class="child child2"></div>
+    </div>
+
+    <h3>BFC 例3：</h3>
+    <div>
+        <p>paragraph 1</p>
+        <div class="warpped">
+            <p>paragraph 2</p>
+        </div>
+    </div>
+</body>
+<style>
+    .warpped {
+        overflow: hidden;
+    }
+    p {
+        color: aqua;
+        background: #000;
+        width: 200px;
+        margin: 20px;
+    }
+    .root {
+        border: 2px solid #000;
+        width: 600px;
+        overflow: hidden;
+    }
+    .child {
+        border: 2px solid #f66;
+        width: 100px;
+        height: 100px;
+        float: left;
+    }
+    .title {
+        color: red;
+    }
+    .left1 {
+        width: 200px;
+        height: 160px;
+        float: left;
+        background: #f66;
+    }
+    .right1 {
+        height: 200px;
+        background-color: beige;
+        overflow: hidden;
+    }
+</style>
+</html>
