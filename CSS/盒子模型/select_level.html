@@ -7,15 +7,35 @@
 </head>
 <body>
     <h2>层级选择器</h2>
-    <div class="basic">
+    <!-- <div class="basic">
        <div class="foo">foo</div>
        <div class="bar">bar</div>
        <div class="baz">baz</div>
+    </div> -->
+    <div class="wrap">
+        <div class="left"></div>
+        <div class="right"></div>
     </div>
 </body>
 <style>
-    .basic div {
+    /* .basic div {
         color: aqua;
+    } */
+    .wrap {
+        position: relative;
+    }
+    .left {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+    }
+    .right {
+        position: absolute;
+        top: 0;
+        left: 200px;
+        height: 200px;
+        right: 0;
+        background-color: blue;
     }
 </style>
 </html>
