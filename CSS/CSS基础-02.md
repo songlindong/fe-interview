@@ -83,7 +83,7 @@ filter 一共有十个函数
 
 ### 定位
 - fixed 相对于浏览器窗口定位
-- absolute 相对于第一个父级部位static的元素定位
+- absolute 相对于第一个父级不为static的元素定位
 - relative 不改变文档流，直接基于原有位置定位
 - sticky CSS3, fixed 和 relative 切换
 - static -- normal
