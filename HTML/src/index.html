@@ -32,7 +32,11 @@
    <shadow-test></shadow-test>
    <button onclick="debounceClickTest()">防抖函数</button>
    <button onclick="test()">测试函数</button>
+   <button onclick="test2()">测试函数2</button>
    <script>
+        function test2() {
+            console.log('测试函数2')
+        }
         const test = foo()
         function  foo() {
           console.log('测试')
