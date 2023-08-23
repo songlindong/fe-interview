@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>层级选择器</title>
+</head>
+<body>
+    <h2>层级选择器</h2>
+    <!-- <div class="basic">
+       <div class="foo">foo</div>
+       <div class="bar">bar</div>
+       <div class="baz">baz</div>
+    </div> -->
+    <div class="wrap">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+<style>
+    /* .basic div {
+        color: aqua;
+    } */
+    .wrap {
+        position: relative;
+        margin: 0px;
+        padding: 0px;
+    }
+    .left {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+    }
+    .right {
+        position: absolute;
+        top: 0;
+        left: 200px;
+        height: 200px;
+        right: 0;
+        background-color: blue;
+    }
+</style>
+</html>

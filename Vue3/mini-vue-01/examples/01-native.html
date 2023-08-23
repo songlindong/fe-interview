@@ -1,0 +1,37 @@
+<html>
+<body>
+  <div id='app'>
+    <input />
+    <button></button>
+  </div>
+  <script>
+    // 数据
+    const data = {
+      message: 'Hello Vue3!!'
+    }
+
+    // 视图
+    const input = document.querySelector('input')
+    const button = document.querySelector('button')
+
+    input.addEventListener('keyup', function () {
+      data.message = this.value
+      update()
+    })
+    button.addEventListener('click', function () {
+      data.message = data.message.split('').reverse().join('')
+      update()
+    })
+
+    // 视图更新
+    function update() {
+      button.innerHTML = data.message
+      input.value = data.message
+    }
+
+    // 初始化
+    update()
+  </script>
+
+</body>
+</html>

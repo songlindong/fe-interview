@@ -75,7 +75,7 @@
     // 2. 两次重复操作的时间间隔与节流延时的关系
        if(nowTime -currentTime >= delay){
         currentTime = Date.now()
-        return fn.apply(_this, args)
+         fn.apply(_this, args)
        }
     }
   }

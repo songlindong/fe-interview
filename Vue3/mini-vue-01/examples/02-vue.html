@@ -1,0 +1,28 @@
+<html>
+
+<body>
+  <div id="app">
+    <!-- 视图 -->
+    <input v-model="data.message" />
+    <button @click="onclick">{{data.message}}</button>
+  </div>
+  <script src="http://unpkg.com/vue"></script>
+  <script>
+    Vue.createApp({
+      setup() {
+        // 数据
+        const data = Vue.reactive({
+          message: 'Hello Vue3!!'
+        })
+        function onclick() {
+          data.message = data.message.split('').reverse().join('')
+        }
+        return {
+          data,
+          onclick
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
