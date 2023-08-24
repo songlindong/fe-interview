@@ -3,24 +3,22 @@
  <button onclick="debounceClickTest()">防抖测试</button>
 <script>
    const debounceClickTest = debounce(function () {
-      console.log(444)
+       console.log('4444')
    }, 3000)
 
-   function debounce(fn, wait) {
+   functin debounce(fn, wait) {
     let timer = null;
-
-    return funciton () {
-        let _this = this
-        args = arguments
-
+    return  function () {
+        let args = arguments;
+        let _this = this;
         if (timer) {
-            clearTimeout(timer)
-            timer = null
+            clearTimeout(timer);
+            timer = null;
         }
-
+        
         timer = setTimeout(() => {
-            fn.apply(_this, args)
-        }, wait)
+            fn.apply(_this, args);
+        }, wait);
     }
    }
 </script>
@@ -28,20 +26,21 @@
 # 节流函数的实现
 
 ```js
-  function throttle(fn, delay) {
-     let currentTime = Date.now();
-
-     return function () {
-        let now = Date.now();
+   function throttle(fn, delay) {
+    let currentTime = Date.now();
+    
+    return function () {
         let _this = this;
-        args = argument;
+        let args = arguments;
+        let nowTime = Date.now();
 
-        if (now - currentTime >= delay) {
+        if(nowTime - currentTime >= delay) {
             currentTime = Date.now();
-            fn.apply(_this, args)
+            fn.apply(_this, args);
         }
-     }
-  }
+    }
+
+   }
 ```
 # 深拷贝的实现
 
@@ -100,5 +99,195 @@
     }
 
     return  res + (!!fraction ? `.${fraction}` : '')
+ }
+```
+
+## 利用正则实现
+
+```js
+ function formatNumber(num) {
+    num = num.toString();
+    let reg = num.indexOf('.') > -1 ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(\d{3})+$)/g;
+
+    return num.replace(reg, '$1,')
+ }
+```
+## Number.prototype.toLocaleString()
+
+```js
+ const number = 123456.789;
+ number.toLocaleString()
+```
+
+## Intl.NumberFormat()
+
+```js
+ const number = 3500;
+ console.log(new Intl.NumberFormat().format(number));
+```
+
+# call、apply、bind实现
+```js
+ // ES5
+ Function.prototype.call = function(context) {
+    context = context || window;
+    context.fn = this;
+
+    let args = [...arguments].slice(1);
+    context.fn(...args)
+    delete context.fn
+ }
+ // ES6
+ Function.prototype.call = function(context, ...args) {
+    if (typeof context === 'undefined' || context === null) {
+        context = window;
+    }
+
+    let fnSymbol = Symbol();
+    context[fnSymbol] = this;
+    let fn = context[fnSymbol](...args)
+    delete context[fnSymbol]
+    return fn
+ }
+ // apply
+ Function.prototype.apply = function(context, arr) {
+    let context = Object(context) || window;
+    context.fn = this;
+    let result;
+
+    if (!arr) {
+        result = context.fn();
+    } else {
+        result = context.fn(...arr);
+    }
+
+    delete context.fn
+    return result;
+ }
+ // bind
+ Function.prototype.bind = function (context) {
+    let _this = this
+    let args = Array.prototype.slice.call(arguments, 1);
+
+    let fBound = function() {
+        let bindArgs = Array.prototype.slice.call(arguments)
+
+        return _this.apply(this instanceof fBound ? this : context, args.concat(bindArgs))
+    }
+    fBound.prototype = this.prototype
+
+    return fBound;
+ }
+```
+
+# 数组拍平
+## 普通方法
+```js
+  let arr = [1, [2, [3, 4, 5]]]
+
+  const flatten = function(arr) {
+    let result = []
+
+    for (let i = 0; i < arr.length; i++) {
+        if (Array.isArray(arr[i])) {
+            result = result.concat(flatten(arr[i]))
+        } else {
+            result.push(arr[i])
+        }
+
+        return result
+    }
+  }
+```
+## toString()
+```js 
+ function flatten(arr) {
+    return arr.toString().split(',').map(function(item) {
+        return +item
+    });
+ }
+```
+## reduce
+```js 
+  function flatten(arr) {
+    return arr.reduce(function(prev, cur) {
+        return prev.concat(Array.isArray(cur) ? flatten(cur) : cur)
+    }, [])
+  }
+```
+
+# 数组去重
+## set
+```js
+ function unique(arr) {
+    return [...new Set(arr)]
+ }
+```
+## reduce
+```js
+ function unique(arr) {
+    return arr.reduce((pre, cur) => {
+        !pre.includes(cur) && pre.push(cur)
+        return pre
+    }, [])
+ }
+```
+# 对象转树
+```js
+编程： 
+/ / 有如下无序数组，共100条；id是每条数据的唯一标识， pid的值是父级元素的id，pid=0是第一层节点，每层节点可能有多个；层深不限。
+const list = [
+  {pid: 0, id: 1, name: ""},  
+  {pid: 1, id: 2, name: ""},
+  {pid: 1, id: 3, name: ""},
+  {pid: 2, id: 4, name: ""},
+  {pid: 0, id: 5, name: ""},
+  // ...
+]
+// 将该数组转为树形结构（使用children数组表示下级列表）
+function arrToTree(arr) {
+  let result = []
+
+  if(!Array.isArray(arr)){
+     return []
+  }
+
+  let map = {}
+  arr.forEach(item => {
+     map[item.id] = item
+  })
+
+  arr.forEach(item => {
+    let _parent = map[item.pid];
+
+    if(_parent){
+     (_parent.children || (_parent.children = [])).push(item)
+    } else {
+      result.push(item)
+    }
+  })
+  return result
+}
+```
+
+# 实现 getValue
+```js
+function getValue(obj, keys) {
+   if (typeof keys !== 'string') {
+     throw new Error('参数类型错误')
+   }
+   const list = keys.split('.')
+   const len = list.length
+
+   for(let i = 0; i < len; i++) {
+     const item = obj[list[i]]
+     if ( item !== undefined) {
+       obj = item
+     } else {
+       throw new Error('参数路径有误')
+     }
+   }
+
+   return obj
  }
 ```
