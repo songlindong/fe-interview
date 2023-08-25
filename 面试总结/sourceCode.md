@@ -291,3 +291,93 @@ function getValue(obj, keys) {
    return obj
  }
 ```
+# 用栈实现队列
+```js
+var MyQueue = function() {
+  this.is= [];
+  this.os = [];
+};
+
+MyQueue.prototype.push = function(x) {
+   this.is.push(x)
+};
+
+MyQueue.prototype.pop = function() {
+   if (!this.os.length) {
+       while (this.is.length) {
+           this.os.push(this.is.pop())
+       }
+   }
+   return this.os.pop()
+};
+MyQueue.prototype.peek = function() {
+     if (!this.os.length) {
+         while (this.is.length) {
+             this.os.push(this.is.pop())
+         }
+     }
+     return this.os[this.os.length - 1]
+};
+MyQueue.prototype.empty = function() {
+    return !this.is.length && !this.os.length;
+};
+const myQueue = new MyQueue()
+myQueue.push(1)
+```
+# 链式调用
+```js
+ function Person(name) {
+   this.name = name;
+   this.queue = [];
+
+   let fn = () => {
+    console.log('init组要做的事情')
+    this.next()
+   }
+
+   this.queue.push(fn)
+
+   setTimeout(() => {
+    this.next()
+   }, 0)
+ }
+
+ Person.prototype = {
+  eat(food) {
+    let fn = () => {
+      console.log('吃' + '' + food)
+      this.next();
+    }
+
+    this.queue.push(fn);
+    return this;
+  },
+  sleep(time) {
+    let fn = () => {
+      setTimeout(() => {
+        console.log('碎觉' + '' + time)
+        this.next()
+      }, time*1000)
+    }
+
+    this.queue.push(fn);
+    return this;
+  },
+  sleepFirst(time) {
+    let fn = () => {
+      setTimeout(() => {
+        console.log('等待' + '' + time)
+        this.next()
+      }, time*1000)
+    }
+    this.queue.unshift(fn)
+    return this;
+  },
+  next() {
+    let fn = this.queue.shift();
+    fn && fn();
+  }
+ }
+
+ new Person('Hank').sleep(1).sleepFirst(5).eat('晚饭');
+```
