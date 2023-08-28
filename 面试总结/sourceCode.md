@@ -6,7 +6,7 @@
        console.log('4444')
    }, 3000)
 
-   functin debounce(fn, wait) {
+   function debounce(fn, wait) {
     let timer = null;
     return  function () {
         let args = arguments;
