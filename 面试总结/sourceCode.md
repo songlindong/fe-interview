@@ -325,6 +325,7 @@ const myQueue = new MyQueue()
 myQueue.push(1)
 ```
 # 链式调用
+## 高阶
 ```js
  function Person(name) {
    this.name = name;
@@ -380,4 +381,107 @@ myQueue.push(1)
  }
 
  new Person('Hank').sleep(1).sleepFirst(5).eat('晚饭');
+```
+## 对象链式调用-promise的异步调用原理
+
+```js
+function MyPromise(fn) {
+
+  this.callbackList = []
+
+  const resolve = (value) => {
+    console.log(value)
+  }
+
+  fn(resolve)
+}
+
+var p1 = new MyPromise((resolve, reject) => {
+  console.log('p1')
+  setTimeout(() => {
+    resolve(1)
+  }, 1000)
+})
+```
+
+## 函数的链式调用- 洋葱圈调用
+
+```js
+ function fn1(ctx, next) {
+  console.log(ctx, '函数fn1执行')
+  next();
+  console.log(ctx, 'fn1 ending');
+ }
+ function fn2(ctx, next) {
+  console.log(ctx, '函数fn2执行')
+  next();
+  console.log(ctx, 'fn2 ending');
+ }
+ function fn3(ctx, next) {
+  console.log(ctx, '函数fn3执行')
+  next();
+  console.log(ctx, 'fn3 ending');
+ }
+
+ function wrap(fns) {
+  return (ctx) => {
+    let l = fns.length;
+
+    return next(0);
+
+    function next(i) {
+      if (i === l) return;
+
+      let fn = fns[i];
+
+      return fn(ctx, next.bind(null, (i + 1)))
+    }
+  }
+ }
+
+ let arr = [fn1, fn2, fn3];
+
+ let fn = wrap(arr);
+
+ fn({ word: 'winter is coming!' })
+```
+## 函数的链式调用-组合（reduce）链式调用
+
+```js
+ function fn1(arg1) {
+  console.log('fn1的参数：', arg1);
+  let arg = arg1 + 30;
+  return arg;
+ }
+ function fn2(arg2) {
+  console.log('fn2的参数：', arg2);
+  let arg = arg2 + 30;
+  return arg;
+ }
+ function fn1(arg3) {
+  console.log('fn3的参数：', arg3);
+  let arg = arg3 + 30;
+  return arg;
+ }
+
+ function compose(fns) {
+  let l = fns.length;
+  if (!l) throw new Error('至少得有一个函数呀');
+
+  if (l === 1) return fns[0];
+
+  return fns.reduce((a, b, i) => {
+    return function c(...arg) {
+      return a(b(...arg))
+    }
+  })
+ }
+
+ let fns = [fn1, fn2, fn3];
+
+ let fn = compose(fns);
+
+ let r = fn(10);
+
+ console.log(r);
 ```
