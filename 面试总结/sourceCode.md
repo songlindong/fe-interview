@@ -283,6 +283,8 @@ function arrToTree(arr) {
   })
   return result
 }
+
+arrToTree(list)
 ```
 
 # 实现 getValue
