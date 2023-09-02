@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<!-- <script src="./src/index.js"></script> -->
+<script>
+   // bundle.js 原型
+     
+    (function (list) {
+        function require(file) {
+        // TODO file
+        var exports = {};
+        (function (exports, code) {
+        eval(code);
+        })(exports, list[file])
+
+            return exports
+        }
+
+        require('index.js')
+    })({
+        'add.js': `exports.default = function (a, b) { return a + b }`,
+        'index.js': `
+            var add = require('add.js').default;
+            console.log(add(2, 4));
+        `
+    })
+    
+
+
+       // console.log(exports.default(1, 2));
+</script>
+<body>
+    
+</body>
+</html>
