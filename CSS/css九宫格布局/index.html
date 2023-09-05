@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <ul class="box-inner">
+            <li>九宫格1</li>
+            <li>九宫格2</li>
+            <li>九宫格3</li>
+            <li>九宫格4</li>
+            <li>九宫格5</li>
+            <li>九宫格6</li>
+            <li>九宫格7</li>
+            <li>九宫格8</li>
+        </ul>
+    </div>
+</body>
+ <style>
+    /* flex实现 */
+    /* .box {
+        position: relative;
+        width: 100%;
+        height: 600px;
+    }
+    .box-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .box-inner > li {
+        overflow: hidden;
+        flex-grow: 0;
+        background-color: darkorange;
+        text-align: center;
+        color: #ffffff;
+        width: 31%;
+        height: 200px;
+        line-height: 200px;
+        margin: 1%;
+    } */
+    /* float实现 */
+    .box {
+        position: relative;
+        width: 100%;
+        height: 600px;
+    }
+    .box-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .box-inner > li {
+        position: relative;
+        float: left;
+        width: 31%;
+        height: 31%;
+        margin: 1%;
+        list-style-type: none;
+        background-color: springgreen;
+        text-align: center;
+        line-height: 200px;
+    }
+ </style>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 1 */
+        /* 视口宽度小于768，网页背景色 */
+        /* @media(max-width: 768px) {
+            body {
+                background-color: pink;
+            }
+        } */
+        /* 视口宽度大于等于1200，网页背景色skyblue */
+        /* @media(min-width: 1200px) {
+            body {
+                background-color: skyblue;
+            }
+        } */
+        /* 2 */
+        /* 屏幕上宽度小于500px时，背景red */
+        @media screen and (max-width: 500px) {
+            body {
+                background-color: red;
+            }
+        }
+
+       /* 屏幕大小介于501px到999px之间，设置为绿 */
+        @media screen and (min-width: 500px) and (max-width: 999px) {
+            body {
+                background-color: green;
+            }
+        }
+        
+        /* 屏幕大于1000px, 设置为紫色 */
+        @media screen and (min-width: 1000px) {
+            body {
+                background-color: purple;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+</body>
+  <link rel="stylesheet" href="./css/a.css" media="(min-width: 992px)"></link>
+  <link rel="stylesheet" href="./css/b.css" media="(min-width: 1200px)"></link>
+</html>
