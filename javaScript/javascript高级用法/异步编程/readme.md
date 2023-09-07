@@ -105,4 +105,124 @@ new Promise((resolve, reject) => {
     return 222;
 })
 ```
+## Promise 获取数据(串行)之then写法注意
+```js
+ const setDelay = (millisecond) => {
+    return new Promise((resolve, reject) => {
+        if (typeof millisecond != 'number') {
+            reject(new Error('参数必须是number类型'))
+        }
 
+        setTimeout(() => {
+            resolve(`我延迟了${millisecond}毫秒后输出的`)
+        }, millisecond)
+    })
+ }
+
+ arr = [setDelay(1000), setDelay(1000), setDelay(1000)]
+
+ arr[0].then(result => {
+    console.log(result)
+    return arr[1]
+ }).then(result => {
+    console.log(result)
+    return arr[2]
+ }).then(result => {
+    console.log(result)
+ })
+
+ arr = [setDelay, setDelay, setDelay]
+ arr[0](1000).then(result => {
+    return arr[1](1000)
+ }).then(result => {
+    console.log(result)
+    return arr[2](1000)
+ }).then(result => {
+    console.log(result)
+ })
+
+
+class U {
+  constructor() {
+    this.promise = Promise.resolve();
+  }
+
+  console(val) {
+    this.promise = this.promise.then(() => {
+      return new Promise((resolve) => {
+        console.log(val);
+        resolve();
+      })
+
+    });
+    console.log(this.promise)
+    return this;
+  }
+
+  setTimeout(wait) {
+    this.promise = this.promise.then(() => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, wait);
+      });
+    });
+    return this;
+  }
+}
+const u = new U();
+u.console("breakfast")
+  .setTimeout(3000)
+  .console("lunch")
+  .setTimeout(3000)
+  .console("dinner");
+
+```
+## promise.all的实现
+```js
+Promise.myAll = (promises) => {
+    return new Promise((rs, rj) => {
+        let count = 0;
+        let result = [];
+        let len = promises.length;
+        promises.forEach((item, index) => {
+         Promise.resolve(item).then((res) => {
+            count += 1;
+            result[ index ] = res
+
+            if (count === len) {
+                rs(result)
+            }
+         }).catch(rj)
+        })
+    })
+}
+
+let p1 = Promise.resolve(1)
+let p2 = Promise.resolve('我是p2')
+
+let p3 = Promise.reject('出错了')
+
+    Promise.myAll([p1, p2, p3]).then((res) => {
+        console.log(res)
+    }).catch((err) => {
+        console.log(err)
+    })
+```
+
+```js
+const demo = async ()=>{
+  let result = await new Promise((resolve, reject) => {
+    setTimeout(()=>{
+      resolve('我延迟了一秒');
+    }, 1000)
+  });
+  console.log('我由于上面的程序还没执行完，先不执行“等待一会”');
+  return result;
+}
+// demo的返回当做Promise
+demo().then(result=>{
+console.log('输出',result); // 输出 我延迟了一秒
+});
+
+```
