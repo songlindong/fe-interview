@@ -203,7 +203,7 @@ let p2 = Promise.resolve('我是p2')
 
 let p3 = Promise.reject('出错了')
 
-    Promise.myAll([p1, p2, p3]).then((res) => {
+    Promise.myAll([p1, p2]).then((res) => {
         console.log(res)
     }).catch((err) => {
         console.log(err)
