@@ -398,3 +398,58 @@
     return  result;
   }
 ```
+## 异步请求并发数
+```js
+ const concurrencyRequest = (urls, maxNum) => {
+  return new Promise((resolve) => {
+    if (urls.length === 0) {
+      resolve()
+      return
+    }
+
+    const results = []
+    let index = 0
+    let count = 0
+
+    async function request() {
+      if (index === urls.length) return
+      const i = index
+      const url = urls[i]
+      index++
+      console.log(url)
+
+      try {
+        const resp = await fetch(url)
+        results[i] = resp
+      } catch (err) {
+        results[i] = err
+      } finally {
+        count++;
+        if (count === urls.length) {
+          console.log('完成了')
+          resolve(results)
+        }
+
+        request()
+      }
+    }
+
+    // maxNum 和 urls.lenght取最小进行调用
+    const times = Math.min(maxNum, urls.length)
+
+    for (let i = 0; i < times; i++) {
+      request()
+    }
+  })
+ }
+
+ // 测试
+ const urls = []
+ for (let i = 1; i <= 20; i++) {
+  urls.push(`https://jsonplaceholder.typicode.com/todos/${i}`)
+ }
+
+ concurrencyRequest(urls, 3).then(res => {
+  console.log(res)
+ })
+```
