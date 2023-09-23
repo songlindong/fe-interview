@@ -7,7 +7,7 @@ export async function mount() {
     console.log('应用正在挂载')
     microContainer = document.createElement('div')
     microContainer.id = 'microContainer'
-    microContainer.innerHTML = 'Hello World'
+    microContainer.innerHTML = 'Hello World666'
     document.body.appendChild(microContainer)
 }
 export async function unmount() {
