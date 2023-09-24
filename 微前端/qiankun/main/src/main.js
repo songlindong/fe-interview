@@ -16,7 +16,11 @@ registerMicroApps([
     name: 'app-vue3', // 自定义微应用名称， 必须唯一
     entry: '//localhost:8081', // 微应用的HTML 入口
     container: '#container', // 将子应用渲染到的入口
-    activeRule: '/app-vue3'
+    activeRule: '/app-vue3',
+    props: {
+      // 传递额外的 props 数据
+      // 主应用在调用微应用的声明周期钩子的时候会把这里的props 合并一起传递
+    }
   },
   // {
   //   name: 'vueApp',
