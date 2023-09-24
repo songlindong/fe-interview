@@ -3,8 +3,13 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
+      <router-link to="/app-react">React App</router-link>
+      <router-link to="/app-vue3">Vue3 App</router-link>
     </nav>
     <router-view/>
+
+    <!-- 子应用渲染的入口 -->
+    <div id="container"></div>
   </div>
 </template>
 
