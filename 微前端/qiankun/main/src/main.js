@@ -9,8 +9,8 @@ Vue.config.productionTip = false
 registerMicroApps([
   // 当匹配到activeRule 的时候，请求获取entry，渲染到container
   {
-    name: 'reactApp', // 自定义微应用名称， 必须唯一
-    entry: '//localhost:3000', // 微应用的HTML 入口
+    name: 'app-vue3', // 自定义微应用名称， 必须唯一
+    entry: '//localhost:8081', // 微应用的HTML 入口
     container: '#container', // 将子应用渲染到的入口
     activeRule: '/app-vue3'
   },

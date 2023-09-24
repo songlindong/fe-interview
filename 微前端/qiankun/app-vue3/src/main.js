@@ -3,7 +3,7 @@ import './public-path';
 import { createApp } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
-import routes from './router';
+// import routes from './router';
 // import store from './store';
 
 // Vue.config.productionTip = false;
@@ -20,8 +20,9 @@ function render(props = {}) {
     history: createWebHistory(),
     routes: []
   });
- 
-  instance = createApp(App).use(router).mount(
+  
+  instance = createApp(App);
+  instance.use(router).mount(
     // 如果是运行在qiankun中则渲染到container中
     // 如果是独立运行，则渲染到 #app
     container ? container.querySelector('#app') : '#app'
@@ -57,10 +58,12 @@ export async function mount(props) {
 // 子应用卸载的时候
 export async function unmount() {
   // 销毁Vue 应用实例  
-  instance.$destroy();
+  console.log('销毁Vue 实例')
+  console.log(instance)
+  instance.unmount();
 
   // 清空渲染期间生成的html
-  instance.$el.innerHTML = '';
+  // instance.$el.innerHTML = '';
 
   // 销毁实例对象，防止内存泄漏
   instance = null;
