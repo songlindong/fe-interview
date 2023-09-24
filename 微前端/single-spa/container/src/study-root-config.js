@@ -34,11 +34,11 @@ registerApplication({
 //   activeWhen: ["/todos"]
 // })
 
-// registerApplication({
-//   name: "@study/realworld",
-//   app: () => System.import("@study/realworld"),
-//   activeWhen: ["/realworld"]
-// })
+registerApplication({
+  name: "@study/realworld",
+  app: () => System.import("@study/realworld"),
+  activeWhen: ["/realworld"]
+})
 
 start({
   urlRerouteOnly: true
