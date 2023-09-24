@@ -6,6 +6,10 @@ import { registerMicroApps, start } from 'qiankun'
 Vue.config.productionTip = false
 
 // 注册微应用列表并启动
+// qiankun内部会拦截监听路由导航
+// 路由导航的时候判断是否匹配子应用的activeRule
+// 如果匹配动态请求加载子应用的entry（所以子应用必须要允许跨域）
+// 然后把加载到的内容渲染到主应用预留好的container中
 registerMicroApps([
   // 当匹配到activeRule 的时候，请求获取entry，渲染到container
   {
