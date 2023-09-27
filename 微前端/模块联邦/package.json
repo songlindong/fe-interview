@@ -8,13 +8,12 @@
   "license": "MIT",
   "workspaces": {
     "packages": [
-      "lib",
       "component",
       "main"
     ]
   },
   "scripts": {
-    "start": "concurrently 'cd ./component && yarn start' 'cd ./lib && yarn start' 'cd ./main && yarn start'"
+    "start": "concurrently 'cd ./component && yarn start' 'cd ./main && yarn start'"
   },
   "keywords": [],
   "devDependencies": {
