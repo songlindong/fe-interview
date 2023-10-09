@@ -17,15 +17,18 @@ module.exports = {
         filename: "bundle.js",
         path: path.resolve('dist')
     },
+    resolveLoader: {
+        // alias: {
+        //     'loader1': path.resolve(__dirname, 'loaders/loader1')
+        // },
+        modules: ['node_modules', path.resolve(__dirname, 'loaders')]
+    },
     module: {
         rules: [{
             test: /\.js$/,
             use: [
                 {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
+                    loader: 'loader1',
                 }
             ]
         }]
