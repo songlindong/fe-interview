@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="nav">
+        <a href="#/page1">page1</a>
+        <a href="#/page2">page2</a>
+        <a href="#/page3">page3</a>
+    </div>
+    <div id="container"></div>
+</body>
+<script>
+
+    class HashRouter {
+        constructor() {
+            this.routers = {};
+            window.addEventListener('hashchange', this.load.bind(this), false);
+        }
+
+        register(hash, callback = function(){}) {
+            this.routers[hash] = callback;
+        }
+
+        registerIndex(callback = function(){}) {
+            this.routers['index'] = callback;
+        }
+
+        load() {
+            let hash = location.hash.slice(1),
+                handler;
+            
+                if (!hash) {
+                    handler = this.routers.index;
+                } else {
+                    handler = this.routers[hash];
+                }
+
+                handler.call(this)
+        }
+    }
+
+    let router = new HashRouter();
+    let container = document.getElementById('container');
+    
+    router.registerIndex(() => container.innerHTML = '我是首页');
+      
+    router.register('/page1', () => container.innerHTML = '我是page1');
+    router.register('/page2', () => container.innerHTML = '我是page2');
+    router.register('/page3', () => container.innerHTML = '我是page3');
+
+    router.load()
+
+    // window.location.hash = 'hash字符串'
+    // let hash = window.location.hash
+    // console.log('hash', hash)
+
+    // window.addEventListener('hashchange', function(enent) {
+    //     let newURL = event.newURL
+    //     console.log(event)
+    //     console.log(newURL)
+    //     let oldURL = event.oldURL
+    //     console.log(oldURL)
+    // }, false)
+
+    // class HashRouter {
+    //     constructor() {
+    //         this.routers = {}
+    //     }
+
+    //     register(hash,callback = function(){}){
+    //         this.routers[hash] = callback
+    //     }
+    // }
+</script>
+</html>
