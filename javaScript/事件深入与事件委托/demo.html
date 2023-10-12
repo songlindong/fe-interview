@@ -1,0 +1,49 @@
+<html lang="en">
+  <body>
+     <button id="clickMe"> click me</button>
+
+     <input type="button" id="myButton" value="DOM0"
+        onclick="console.log('click DOM0 button');">
+  </body>
+</html>
+<script>
+    var button = document.getElementById('clickMe')
+    
+    // 1、默认绑定的点击事件触发 => 触发打印顺序？
+    // button.onclick = function() {
+    //     console.log('1. click button')
+    // }
+    document.body.onclick = function() {
+        console.log('2. click body')
+    }
+    document.onclick = function() {
+        console.log('3. click document')
+    }
+
+    // window.onclick = function() {
+    //     console.log('4. click window')
+    // }
+
+    // => 有没有什么办法强制使用捕获？
+    // 2. 尝试使用捕获
+    window.addEventListener('click', function() {
+        console.log('4. click window')
+    }, true)
+
+    // => 为什么4在捕获时候跑到了前面
+
+
+    // 3. 阻止冒泡
+    button.addEventListener('click', function(event) {
+        console.log('1. click button');
+        event.stopPropagation();
+        console.log('stopPropagation');
+    }, false);
+
+    // 4. DOM0事件绑定
+    // DOM0级事件做事件监听，绑定的事件触发顺序
+    document.getElementById('myButton').onclick = function() {
+        console.log('click DOM2 button');
+    }
+    // => dom2强度更大， 会覆盖dom0
+</script>
