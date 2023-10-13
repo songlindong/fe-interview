@@ -13,12 +13,12 @@
     // button.onclick = function() {
     //     console.log('1. click button')
     // }
-    document.body.onclick = function() {
-        console.log('2. click body')
-    }
-    document.onclick = function() {
-        console.log('3. click document')
-    }
+    // document.body.onclick = function() {
+    //     console.log('2. click body')
+    // }
+    // document.onclick = function() {
+    //     console.log('3. click document')
+    // }
 
     // window.onclick = function() {
     //     console.log('4. click window')
@@ -34,16 +34,16 @@
 
 
     // 3. 阻止冒泡
-    button.addEventListener('click', function(event) {
-        console.log('1. click button');
-        event.stopPropagation();
-        console.log('stopPropagation');
-    }, false);
+    // button.addEventListener('click', function(event) {
+    //     console.log('1. click button');
+    //     event.stopPropagation();
+    //     console.log('stopPropagation');
+    // }, false);
 
     // 4. DOM0事件绑定
     // DOM0级事件做事件监听，绑定的事件触发顺序
-    document.getElementById('myButton').onclick = function() {
-        console.log('click DOM2 button');
-    }
+    // document.getElementById('myButton').onclick = function() {
+    //     console.log('click DOM2 button');
+    // }
     // => dom2强度更大， 会覆盖dom0
 </script>

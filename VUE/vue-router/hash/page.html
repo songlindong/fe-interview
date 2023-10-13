@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>
+            <a onclick="router.push({name: 'course'})">course</a>
+            <a onclick="router.push({name: 'teacher'})">teacher</a>
+        </li>
+    </ul>
+    <div class="main-content">
+       <div class="main-box" data-component-name="course">course content</div>
+       <div class="main-box" data-component-name="teacher">teacher content</div>
+    </div>
+</body>
+
+<script src="./myRouter.js"></script>
+<script>
+    window.router = new MyRouter({
+        routes: [{
+            path: '/course',
+            name: 'course'
+        }]
+    })
+</script>
+</html>
