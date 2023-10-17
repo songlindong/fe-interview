@@ -18,6 +18,25 @@ export const start = () => {
   //    history 路由
   //      history.go、history.back、history.forward 使用 popstate 事件：window.onpopstate
   //      pushState、replaceState 需要通过函数重写的方式进行劫持
+  
+  // 前进后退 （事件监听的方式）
+  // window.addEventListener('popstate', () => {
+  //   console.log('popstate')
+  // })
+
+  // 添加历史记录（函数重写）
+  // const rawPushState = window.history.pushState
+  // window.history.pushState = (...args) => {
+  //    rawPushState.apply(window.history, args)
+  //    console.log('监视到 pushState 变化了')
+  // }
+
+  // 替换历史记录（函数重写）
+  // const rawReplaceState = window.history.replaceState
+  // window.history.replaceState = (...args) => {
+  //   rawReplaceState.apply(window.history, args)
+  //    console.log('监视到 pushState 变化了')
+  // }
   rewriteRouter()
 
   // 初始执行匹配
