@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        // 我们希望知道本次渲染消耗的时间
+        // Date console.time() 无法得到渲染时间，而是计算的代码的执行时间
+        
+        const container = document.getElementById('container')
+        // 将一次 js 执行 + 一次渲染，优化成 n 次 js 执行间，存在 n 次渲染
+
+        // 1. 记录加载到的位置
+        let index = 0;
+
+        // 2. 每次加载 1000 条，总共加载 10w 条
+        function loadData () {
+            // 5. 限制总数
+            if (index >= 500000) {
+                return
+            }
+
+            // 3. 加载 1000 条
+            for (let i=0; i < 1000; i++) {
+                const div = document.createElement('div')
+                div.innerText = index + i
+                container.appendChild(div)
+            }
+            // 4. 计数变化
+            index += 1000
+
+            // 6. 加载下一个分片
+            // loadData() // 瞬间加载，错误写法
+            
+            setTimeout(loadData, 0);
+        }
+
+        loadData()
+    </script>
+</body>
+</html>
