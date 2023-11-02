@@ -67,6 +67,7 @@ let n: null = null;
 // 单纯型数组
 let classArr: string[] = ['basic', 'execute'];
 let classArr: Array<string> = ['basic', 'execute'];
+
 ```
 
 * tuple - 元组
@@ -278,7 +279,7 @@ const c3 = { name: 'TS', level:1 }
  }
  interface B {
     c: number;
-    e: string;
+    e: boolean;
  }
  
  type AB = A & B;
