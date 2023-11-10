@@ -597,7 +597,64 @@ for (let i = 1; i <= 20; i++) {
 concurrencyRequest(urls, 3).then(res => {
     console.log(res);
 })
+```
+```js
+在JavaScript中，可以使用一些方法来判断是否存在循环引用。以下是两种常用的方法：
 
+使用"Map"或"Set"来存储已经访问过的对象：
 
+function hasCircularReference(obj) {
+  const visited = new Map();
 
+  function checkCircular(obj) {
+    if (typeof obj !== 'object' obj === null) {
+      return false;
+    }
+
+    if (visited.has(obj)) {
+      return true;
+    }
+
+    visited.set(obj, true);
+
+    for (let key in obj) {
+      if (checkCircular(obj[key])) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  return checkCircular(obj);
+}
+
+const obj1 = {};
+const obj2 = { obj1 };
+obj1.obj2 = obj2;
+
+console.log(hasCircularReference(obj1));  // true
+通过使用"Map"来存储已经访问过的对象，如果在遍历过程中发现当前对象已经存在于"Map"中，则存在循环引用的情况。
+
+使用try-catch语句:
+
+function hasCircularReference(obj) {
+  try {
+    JSON.stringify(obj);
+    return false;
+  } catch (e) {
+    return true;
+  }
+}
+
+const obj1 = {};
+const obj2 = { obj1 };
+obj1.obj2 = obj2;
+
+console.log(hasCircularReference(obj1));  // true
+JSON.stringify()方法在序列化对象时，会自动处理循环引用的情况，如果发现循环引用，则会抛出异常。通过使用try-catch语句，我们可以判断是否存在循环引用。
+
+无论使用哪种方法，判断循环引用需要对对象进行遍历，因此对于复杂的对象结构，可能会带来一定的性能开销。因此，要根据实际情况选择合适的方法来判断循环引用。
+
+希望以上的解答能对你有所帮助。如果你有任何其他问题，请随时提问。
 ```
