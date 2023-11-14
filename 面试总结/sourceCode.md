@@ -307,6 +307,17 @@ function getValue(obj, keys) {
 
    return obj
  }
+ const obj = {
+   a: {
+     b: {
+       c: {
+         name: 'Martin'
+       }
+     }
+   }
+ }
+let result = getValue(obj, 'a.b.c')
+console.log(result)
 ```
 # 用栈实现队列
 ```js
@@ -657,4 +668,49 @@ JSON.stringify()方法在序列化对象时，会自动处理循环引用的情�
 无论使用哪种方法，判断循环引用需要对对象进行遍历，因此对于复杂的对象结构，可能会带来一定的性能开销。因此，要根据实际情况选择合适的方法来判断循环引用。
 
 希望以上的解答能对你有所帮助。如果你有任何其他问题，请随时提问。
+```
+
+# tree 扁平化
+```js
+let tree = [
+    {
+        "id": 1,
+        "name": "1",
+        "pid": 0,
+        "children": [
+            {
+                "id": 2,
+                "name": "2",
+                "pid": 1,
+                "children": []
+            },
+            {
+                "id": 3,
+                "name": "3",
+                "pid": 1,
+                "children": [
+                   {
+                     "id": 4,
+                     "name": "4",
+                     "pid": 3,
+                     "children": []
+                   }
+                ]
+            }
+        ]
+    }
+]
+function treeToArray(tree) {
+  let res = []
+  for (const item of tree) {
+    console.log('item', item)
+    const { children, ...i } = item
+    if (children && children.length) {
+      res = res.concat(treeToArray(children))
+    }
+    res.push(i)
+  }
+  return res
+}
+treeToArray(tree)
 ```
