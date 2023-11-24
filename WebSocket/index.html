@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="msg"></div>
+    <input type="text" id="text">
+    <input type="button" value="发送" onclick="send()">
+
+    <script>
+       var websocket =  new WebSocket('ws://127.0.0.1:8080')
+       
+       // readyState
+       // 0 链接还没有建立
+       // 1 链接建立成功
+       // 2 链接正在关闭
+       // 3 链接已经关闭
+       websocket.onopen = function() {
+        console.log(websocket.readyState)
+       }
+
+       function send() {
+        var text =  document.getElementById('text').value
+        websocket.send(text)
+       }
+
+       websocket.onmessage = function(back) {
+         console.log(back)
+       }
+    </script>
+</body>
+</html>
