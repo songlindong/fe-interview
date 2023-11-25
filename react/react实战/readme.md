@@ -110,4 +110,19 @@ pnpm add @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@lates
 - antd
 - headlessui
 -
+### 构建的方案
+- bundled
+[module]
+一般就是指一个模块，一般从构建的角度来，一个文件就是一个module
+[chunk]
+一般一个构建流程，就是一个chunk
+
+[bundle]
+一般是指产物，main.xxx.js -> 是把你所有的文件合并在一起的，形成了bundle
+[channel]
+一般和uri是挂接的，代表唯一地址
+典型：
+webpack, rollup
+- bundleless
+gulp, ts
 ### 国际化、图标库。。。方案有哪些？
