@@ -17,5 +17,8 @@
         "prettier"
     ],
     "rules": {
+        "@typescript-eslint/no-var-requires": "off",
+        "no-undef": "off",
+        "react/jsx-uses-react": "off"
     }
 }
