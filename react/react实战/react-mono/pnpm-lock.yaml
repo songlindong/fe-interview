@@ -29,6 +29,7 @@ importers:
       '@babel/preset-react': ^7.23.3
       '@babel/preset-typescript': ^7.23.3
       '@proj/utils': workspace:^1.0.0
+      '@types/node': ^20.10.0
       '@types/react': ^18.2.38
       '@types/react-dom': ^18.2.17
       '@types/react-router': ^5.1.20
@@ -63,6 +64,7 @@ importers:
       '@babel/preset-env': registry.npmmirror.com/@babel/preset-env/7.23.3_@babel+core@7.23.3
       '@babel/preset-react': registry.npmmirror.com/@babel/preset-react/7.23.3_@babel+core@7.23.3
       '@babel/preset-typescript': registry.npmmirror.com/@babel/preset-typescript/7.23.3_@babel+core@7.23.3
+      '@types/node': registry.npmmirror.com/@types/node/20.10.0
       '@types/react': registry.npmmirror.com/@types/react/18.2.38
       '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.2.17
       '@types/react-router': registry.npmmirror.com/@types/react-router/5.1.20

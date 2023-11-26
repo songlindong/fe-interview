@@ -1,6 +1,8 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+
 module.exports = function(isDev) {
     return {
         // 最基础的，出入口
@@ -71,6 +73,27 @@ module.exports = function(isDev) {
                             ]
                         },
                     ]
+                },
+                {
+                    // webpack5 以前要单独的 loader(url-loader, file-loader), 现在内置了
+                    test: /\.(png|jpg|jpeg|gif|svg)$/,
+                    generator: {
+                        filename: 'static/images/[name].[contenthash:8][ext]'
+                    }
+                },
+                {
+                    // webpack5 以前要单独的 loader(url-loader, file-loader), 现在内置了
+                    test: /\.(woff2?|eot|ttf|otf)$/,
+                    generator: {
+                        filename: 'static/fonts/[name].[contenthash:8][ext]'
+                    }
+                },
+                {
+                    // webpack5 以前要单独的 loader(url-loader, file-loader), 现在内置了
+                    test: /\.(mp4|flv|wav)$/,
+                    generator: {
+                        filename: 'static/media/[name].[contenthash:8][ext]'
+                    }
                 }
             ]
         },
@@ -86,6 +109,10 @@ module.exports = function(isDev) {
                 template: path.resolve(__dirname, "../public/index.html"),
                 // 自动注入资源
                 inject: true,
+            }),
+            // 把一些环境变量注入进来
+            new webpack.DefinePlugin({
+               'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV)
             }),
             new MiniCssExtractPlugin({
                 filename: isDev ? "static/css/[name].css"
