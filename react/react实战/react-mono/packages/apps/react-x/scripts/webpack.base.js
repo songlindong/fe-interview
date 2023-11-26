@@ -27,36 +27,49 @@ module.exports = function(isDev) {
                         loader: 'babel-loader'
                     }
                 },
-                // postcss-loader 帮我们处理一些css 的语法转换, autoprefixer
-                // css-loader: 主要是处理路径 <link>
-                // style-loader: 其实是帮我们的css属性，挂到元素上
-                // 在开发环境下，css嵌套在了 style 标签里，方便热替换
-                // 生产环境下，我们希望把css单独抽离出来，方便配置缓存
-                // 
                 {
-                    test: /.css$/,
-                    use: [
-                        isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-                        'css-loader',
-                        'postcss-loader'
-                    ]
-                },
-                {
-                    test: /\.module\.(less|css)$/,
-                    include: [path.resolve(__dirname, '../src')],
-                    use: [
-                        isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                    oneOf: [
+                        // postcss-loader 帮我们处理一些css 的语法转换, autoprefixer
+                        // css-loader: 主要是处理路径 <link>
+                        // style-loader: 其实是帮我们的css属性，挂到元素上
+                        // 在开发环境下，css嵌套在了 style 标签里，方便热替换
+                        // 生产环境下，我们希望把css单独抽离出来，方便配置缓存
+                        // 
                         {
-                         loader: 'css-loader',
-                         options: {
-                            modules: {
-                                // 借助 css-module, 可以实现BEM风格
-                                localIdentName: '[path][name]__[local]-[hash:base64:5]'
-                            }
-                         }
+                            test: /.css$/,
+                            use: [
+                                isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                                'css-loader',
+                                'postcss-loader'
+                            ]
                         },
-                        'postcss-loader',
-                        'less-loader'
+                        {
+                            test: /\.module\.(less|css)$/,
+                            include: [path.resolve(__dirname, '../src')],
+                            use: [
+                                isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                                {
+                                loader: 'css-loader',
+                                options: {
+                                    modules: {
+                                        // 借助 css-module, 可以实现BEM风格
+                                        localIdentName: '[path][name]__[local]-[hash:base64:5]'
+                                    }
+                                }
+                                },
+                                'postcss-loader',
+                                'less-loader'
+                            ]
+                        },
+                        {
+                            test: /.less$/,
+                            use: [
+                                isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                                'css-loader',
+                                'postcss-loader',
+                                'less-loader'
+                            ]
+                        },
                     ]
                 }
             ]

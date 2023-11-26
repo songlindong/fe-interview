@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from './index.module.less'
+// import styles from './index.module.less'
 type Props = {
     style?: string;
 }
@@ -12,7 +12,7 @@ type Props = {
 
 const App: FC<Props> = () => {
     return (
-        <div className={styles.app}>App</div>
+        <div className= ' text-blue-500 bg-red-300 text-lg flex flex-col'>App</div>
     )
 }
 

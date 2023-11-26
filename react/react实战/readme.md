@@ -109,7 +109,7 @@ pnpm add @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@lates
 #### css module
 
 #### utility-css
-- tailwindcss
+- tailwindcss（原子化css）
 - windicss
 
 #### headless with styled 怎么选？
