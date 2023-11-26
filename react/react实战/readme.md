@@ -87,8 +87,23 @@ pnpm add @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@lates
 ## react 
 
 ### css 的方案有哪些？
+- 基于什么样的背景
+- 选项 -- 哪些
+- 为什么选择了这个
+
 #### css in js
 - emotion
+```js
+ import { css, cx } from 'emotion';
+
+ const app = css`
+  background-color: blue
+ `
+
+ return (
+  <div classname=cx(app)></div>
+ )
+```
 - styled-component
 
 #### css module

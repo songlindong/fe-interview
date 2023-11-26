@@ -40,6 +40,24 @@ module.exports = function(isDev) {
                         'css-loader',
                         'postcss-loader'
                     ]
+                },
+                {
+                    test: /\.module\.(less|css)$/,
+                    include: [path.resolve(__dirname, '../src')],
+                    use: [
+                        isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+                        {
+                         loader: 'css-loader',
+                         options: {
+                            modules: {
+                                // 借助 css-module, 可以实现BEM风格
+                                localIdentName: '[path][name]__[local]-[hash:base64:5]'
+                            }
+                         }
+                        },
+                        'postcss-loader',
+                        'less-loader'
+                    ]
                 }
             ]
         },
