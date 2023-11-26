@@ -127,6 +127,8 @@ react: 在tailwindcss 和windicss中，我们选择了tailwind而不是windi,win
 - solid?
 - redux?
 - mobx
+- recoil
+ - 核心api: atom, selector
 - pinia
 
 ### 组件库的方案有哪些

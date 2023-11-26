@@ -5,4 +5,10 @@ import App from './app';
 
 import './index.less'
 
-ReactDOM.createRoot(document.getElementById('app') as Element).render(<App />)
+import { RecoilRoot } from 'recoil';
+
+ReactDOM.createRoot(document.getElementById('app') as Element).render(
+ <RecoilRoot>
+   <App />
+ </RecoilRoot>
+)
