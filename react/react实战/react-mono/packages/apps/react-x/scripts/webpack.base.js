@@ -1,5 +1,6 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = function(isDev) {
     return {
         // 最基础的，出入口
@@ -42,8 +43,19 @@ module.exports = function(isDev) {
                 }
             ]
         },
-
+        /**
+         * extensions 是webpack的解析项，用于在引入模块的时候，可以不带文件后缀
+         */
+        resolve: {
+            extensions: ['.tsx', '.ts', '.js', '.jsx']
+        },
         plugins: [
+            new HtmlWebpackPlugin({
+                // 模板
+                template: path.resolve(__dirname, "../public/index.html"),
+                // 自动注入资源
+                inject: true,
+            }),
             new MiniCssExtractPlugin({
                 filename: isDev ? "static/css/[name].css"
                  : "static/css/[name].[contenthash:8].css"
