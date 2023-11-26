@@ -113,6 +113,14 @@ pnpm add @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@lates
 - windicss
 
 #### headless with styled 怎么选？
+???
+很多时候，antd的样式， 是不是和设计师不一样，你会在代码里，加很多！important,很多时候，组件能力都差不多，但是布局和样式差别很大，你不得不重写？？
+
+- 我们这个项目，比较重视相同的功能，有很多布局能力，同时设计师的风格
+- 和现在的主流组件库差别比较大，细节比较多，使用antd这种，不是很合适
+- 所以，我们综合考量，选择了headless方案
+
+react: 在tailwindcss 和windicss中，我们选择了tailwind而不是windi,windi过于灵活，难以构建有效的标准
 
 ### 状态管理的方案有哪些？
 - zustand?
