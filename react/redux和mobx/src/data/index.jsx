@@ -21,10 +21,10 @@ export default function Data() {
   }, [])
 
    const handleClick1 = () => {
-    dataObj.modifyData({ count: 2})
+    dataObj.modifyDataByAction({ type: 'INCREMENT'})
    }
    const handleClick2 = () => {
-    dataObj.modifyData({ count: 0 })
+    dataObj.modifyDataByAction({ type: 'DECREMENT' })
    }
 
   return (

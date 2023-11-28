@@ -6,8 +6,14 @@ export const createData = function(init) {
         return data;
     }
 
-    function modifyData(newData) {
-        data = newData;
+    // function modifyData(newData) {
+    //     data = newData;
+    //     // notifyAll
+    //     deps.forEach(fn => fn())
+    // }
+
+    function modifyDataByAction(action) {
+        data = _setData(data, action)
         // notifyAll
         deps.forEach(fn => fn())
     }
@@ -17,7 +23,18 @@ export const createData = function(init) {
     }
     return  {
         getData,
-        modifyData,
+        modifyDataByAction,
         subscribe
+    }
+}
+
+function _setData(data, action) {
+    switch(action.type) {
+        case "INCREMENT":
+            return {...data, count: data.count + 1};
+        case "DECREMENT":
+            return {...data, count: data.count - 1};
+        default:
+            return data;
     }
 }
