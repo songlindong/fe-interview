@@ -1,37 +1,34 @@
-import React, {useEffect, useState } from 'react'
-import { createData } from './data'
+import React, { useEffect, useState } from 'react'
+// import { dataObj, init } from './data';
+import store from '../store/index';
 
 
-let init = {
-    count: 1
-}
 
-export const dataObj = createData(init)
+
 
 export default function Data() {
 
-  const [state, setState] = useState(init)
 
-  useEffect(() => {
-    dataObj.subscribe(() => {
-        let currentData = dataObj.getData();
-        console.log('this data is', currentData);
-        setState(() => currentData)
-    })
-  }, [])
+    useEffect(() => {
+        store.subscribe(() => {
+            let currentData = store.getState();
+            console.log('this data is ', currentData);
 
-   const handleClick1 = () => {
-    dataObj.modifyDataByAction({ type: 'INCREMENT'})
-   }
-   const handleClick2 = () => {
-    dataObj.modifyDataByAction({ type: 'DECREMENT' })
-   }
+        })
+    },[])
+
+    const handleClick1 = () => {
+        store.dispatch({ type: "ADD_COUNT" })
+    };
+    const handleClick2 = () => {
+        store.dispatch({ type: "ADD_AGE" })
+    };
 
   return (
     <div>
-        {state.count}
+    {store.count}
         <button onClick={handleClick1}>click1</button>
-        <button onClick={handleClick2}>click1</button>
+        <button onClick={handleClick2}>click2</button>
     </div>
   )
 }

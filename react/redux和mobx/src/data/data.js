@@ -8,20 +8,21 @@ export const createData = function(init) {
 
     // function modifyData(newData) {
     //     data = newData;
-    //     // notifyAll
+    //     // nitifyAll
     //     deps.forEach(fn => fn())
     // }
 
     function modifyDataByAction(action) {
         data = _setData(data, action)
-        // notifyAll
+        // nitifyAll
         deps.forEach(fn => fn())
     }
-    
+
     function subscribe(handler) {
-        deps.push(handler)
+        deps.push(handler);
     }
-    return  {
+
+    return {
         getData,
         modifyDataByAction,
         subscribe
@@ -38,3 +39,16 @@ function _setData(data, action) {
             return data;
     }
 }
+
+
+
+export const init = {
+    count: 1,
+    info: {
+        age: 3
+    },
+    
+    
+}
+
+export const dataObj = createData(init);
